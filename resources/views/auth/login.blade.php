@@ -32,6 +32,12 @@
                             <div class="top-title text-center ">
                                 <h2>Login</h2>
                                 <p>Don't have an account yet? <a href="{{route('register.get')}}">Sign up for free</a></p>
+                                <p><div class="form-group" class="text-success">
+                                    @if(!empty(Session::get('reminder_pass')))
+                                        {{Session::get('reminder_pass')}}
+                                        {{Session::forget('reminder_pass')}}
+                                    @endif
+                                </div></p>
                             </div>
                             <form action="{{route('login.post')}}" method="POST" class="common-form">
 
@@ -46,9 +52,11 @@
                                 </div>
                                 <div class="checkk ">
                                     <div class="form-check p-0 m-0"> <input type="checkbox" id="remember" checked="{{$_COOKIE['check'] == 1 ? 'checked' : ''}}"  name="check" value="{{$_COOKIE['check'] ? : ''}}"> <label
-                                            class="p-0" for="remember"> Remember Me</label> </div> <a href="#0"
+                                            class="p-0" for="remember"> Remember Me</label> </div> <a href="{{route('password.restore')}}"
                                                                                                       class="forgot"> Forgot Password?</a>
-                                </div> <button type="submit" class="btn--primary style2">Login </button>
+                                </div>
+
+                                <button type="submit" class="btn--primary style2">Login </button>
                             </form>
                         </div>
                     </div>

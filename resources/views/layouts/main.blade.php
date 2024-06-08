@@ -210,7 +210,9 @@
                                                 <option value="4">FRENCH</option>
                                             </select> </div>
                                         @if(!auth()->user())
-                                            <a href="{{route('register.get')}}"> Sign In / Register </a>
+                                            <a href="{{route('register.get')}}"> Register </a>
+                                            /
+                                            <a href="{{route('login.get')}}">Sign In  </a>
                                         @else()
                                             <a href="{{route('logout')}}">Logout</a>
                                         @endif

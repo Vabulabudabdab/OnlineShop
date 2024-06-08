@@ -18,4 +18,8 @@ class Controller {
         return view('auth.login');
     }
 
+    public function restore_password() {
+        return view('auth.password-restore');
+    }
+
 }

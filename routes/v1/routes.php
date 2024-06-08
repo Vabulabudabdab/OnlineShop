@@ -20,5 +20,8 @@ Route::group(['prefix' => 'auth'],  function () {
 
     Route::post('/login/user', \App\Http\Controllers\Auth\LoginController::class)->name('login.post');
 
+    Route::get('/restore', [App\Http\Controllers\V1\Controller::class, 'restore_password'])->name('password.restore');
+
+    Route::post('/restore', \App\Http\Controllers\Auth\RestorePasswordController::class)->name('password.restore.submit');
 
 });
