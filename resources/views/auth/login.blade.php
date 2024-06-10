@@ -44,14 +44,14 @@
                                 {{csrf_field()}}
 
                                 <div class="form-group"> <input type="text" class="form-control"
-                                                                placeholder="Email Address" name="email" value="{{$_COOKIE['email'] ? : ''}}"> </div>
+                                                                placeholder="Email Address" name="email" value="{{!empty($_COOKIE['email']) ? $_COOKIE['email'] :  ''}}"> </div>
                                 <div class="form-group eye">
                                     <div class="icon icon-1"> <i class="flaticon-hidden"></i></div> <input
-                                        type="password" id="password-field" class="form-control" placeholder="Password" name="password" value="{{$_COOKIE['password'] ? : ''}}">
+                                        type="password" id="password-field" class="form-control" placeholder="Password" name="password" value="{{!empty($_COOKIE['password']) ? $_COOKIE['password'] : ''}}">
                                     <div class="icon icon-2 "><i class="flaticon-visibility"></i> </div>
                                 </div>
                                 <div class="checkk ">
-                                    <div class="form-check p-0 m-0"> <input type="checkbox" id="remember" checked="{{$_COOKIE['check'] == 1 ? 'checked' : ''}}"  name="check" value="{{$_COOKIE['check'] ? : ''}}"> <label
+                                    <div class="form-check p-0 m-0"> <input type="checkbox" id="remember" checked="{{!empty($_COOKIE['check']) == 1 ? 'checked' : ''}}"  name="check"> <label
                                             class="p-0" for="remember"> Remember Me</label> </div> <a href="{{route('password.restore')}}"
                                                                                                       class="forgot"> Forgot Password?</a>
                                 </div>

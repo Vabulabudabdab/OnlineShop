@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'owner' => \App\Http\Middleware\OwnerMiddleWare::class,
             'auth' => \App\Http\Middleware\AuthMiddleWare::class,
+            'verify' => \App\Http\Middleware\EmailVerificationMiddleWare::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

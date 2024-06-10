@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-style')
 
 @section('content')
     <div class="loader"><span>Karte...</span></div> <!-- ==========Preloader========== -->

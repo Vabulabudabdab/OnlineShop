@@ -33,6 +33,7 @@ class AuthService {
                 ]
             );
 
+
             Auth::login($user);
             event(new Registered($user));
 //            RegisterUserJob::dispatch($user); Пока-что не работает, нужно кое-что проверить

@@ -162,7 +162,7 @@
                                     <li><a href="compare.html"> Compare </a></li>
                                     <li><a href="wishlist.html"> Wishlist </a></li>
                                     <li><a href="order-track.html"> Order Track </a></li>
-                                    <li><a href="my-account.html"> My Account </a></li>
+                                    <li><a href="{{route('profile', auth()->user()->name )}}"> My Account </a></li>
                                     <li><a href="faq.html"> FAQ </a></li>
                                     <li><a href="error.html"> 404 </a></li>
                                     <li><a href="shop-grid.html">Shop Grid </a></li>
@@ -201,13 +201,11 @@
                                     <div class="right d-flex align-items-center ">
                                         <div class="language currency"> <select>
                                                 <option>USD</option>
-                                                <option value="1">INR</option>
-                                                <option value="2">BDT</option>
+                                                <option value="1">RUB</option>
                                             </select> </div>
                                         <div class="language two"> <select>
-                                                <option>ENGLISH </option>
-                                                <option value="1">GERMAN</option>
-                                                <option value="4">FRENCH</option>
+                                                <option>EN</option>
+                                                <option value="1">RU</option>
                                             </select> </div>
                                         @if(!auth()->user())
                                             <a href="{{route('register.get')}}"> Register </a>
@@ -364,9 +362,10 @@
                                                                                 <li><a href="order-track.html">Order
                                                                                         Track </a>
                                                                                 </li>
-                                                                                <li><a href="my-account.html">My
+                                                                                <li><a href="{{route('profile', auth()->user()->name )}}">My
                                                                                         Account </a>
                                                                                 </li>
+                                                                        
                                                                                 <li><a href="blog.html">Blog</a>
                                                                                 </li>
                                                                                 <li><a href="blog-single.html">Blog
@@ -452,7 +451,7 @@
                                                         <li><a href="contact.html">Contact</a></li>
                                                         <li><a href="faq.html">FAQ</a></li>
                                                         <li><a href="order-track.html">Order_Track</a></li>
-                                                        <li><a href="my-account.html">My_Account</a></li>
+                                                        <li><a href="{{route('profile', auth()->user()->name )}}">My_Account</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown-list"> <a href="contact.html">Contact</a> </li>
@@ -462,7 +461,7 @@
 
                                         <div class="right d-flex align-items-center justify-content-end">
                                             <ul class="main-menu__widge-box d-flex align-items-center ">
-                                                <li class="d-lg-block d-none"><a href="my-account.html"><i
+                                                <li class="d-lg-block d-none"><a href="{{route('profile', auth()->user()->name)}}"><i
                                                             class="flaticon-user"></i> </a></li>
                                                 <li class="d-lg-block d-none"><a href="wishlist.html"
                                                                                  class="number"><i class="flaticon-heart"></i> <span
@@ -647,7 +646,7 @@
                                                                     <li><a href="order-track.html">Order
                                                                             Track </a>
                                                                     </li>
-                                                                    <li><a href="my-account.html">My
+                                                                    <li><a href="{{route('profile', auth()->user()->name )}}">My
                                                                             Account </a>
                                                                     </li>
                                                                     <li><a href="blog.html">Blog</a>
@@ -735,7 +734,7 @@
                                             <li><a href="contact.html">Contact</a></li>
                                             <li><a href="faq.html">FAQ</a></li>
                                             <li><a href="order-track.html">Order_Track</a></li>
-                                            <li><a href="my-account.html">My_Account</a></li>
+                                            <li><a href="{{route('profile', auth()->user()->name )}}">My_Account</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown-list"> <a href="contact.html">Contact</a> </li>
@@ -841,8 +840,8 @@
                             <h4> Useful Links </h4>
                         </div>
                         <ul class="footer-links">
-                            <li><a href="my-account.html">Account</a></li>
-                            <li><a href="login.html">Sign In</a></li>
+                            <li><a href="{{route('profile', auth()->user()->name )}}">Account</a></li>
+                            <li><a href="{{route('login')}}">Sign In</a></li>
                             <li><a href="cart.html">View Cart</a></li>
                             <li><a href="wishlist.html">My WishList</a></li>
                             <li><a href="compare.html">Compare Products</a></li>
