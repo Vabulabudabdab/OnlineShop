@@ -813,7 +813,7 @@
                         <div class="col-md-6 wow fadeInUp animated">
                             <div class="products-cetagory-three__single">
                                 <div class="products-cetagory-three__single-img height-400"
-                                     style="background-image: url(assets/images/shop/products-v7-img1.jpg);"> </div>
+                                     style="background-image: url({{asset('assets/images/shop/products-v7-img1.jpg')}});"> </div>
                                 <div class="products-cetagory-three__single-content "> <span>Puma Hot Deal</span>
                                     <h2>2022 Shoes</h2>
                                     <div class="text">
@@ -840,7 +840,7 @@
                         <div class="col-xxl-3 col-md-6 wow fadeInUp animated">
                             <div class="products-cetagory-three__single style3">
                                 <div class="products-cetagory-three__single-img  height-400  "
-                                     style="background-image: url(assets/images/shop/products-v7-img2.jpg);"> </div>
+                                     style="background-image: url({{asset('assets/images/shop/products-v7-img2.jpg')}}"> </div>
                                 <div class="products-cetagory-three__single-content "> <span>Puma Hot Deal</span>
                                     <h2>2022 Shoes</h2>
                                     <div class="text">

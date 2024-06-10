@@ -13,7 +13,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable;
 
     protected $table = 'users';
-    protected $guarded = false;
+
+    protected $fillable = ['name', 'email', 'password', 'image', 'role_id', 'remember_token'];
 
     public function sendEmailVerificationNotification() {
         $this->notify(new SendVerifyWithQueueNotification());

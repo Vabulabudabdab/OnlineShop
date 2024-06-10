@@ -12,7 +12,7 @@ Route::group(['prefix' => 'home'],  function () {
     Route::group(['prefix' => 'profile'], function () {
        Route::get('/{name}', [\App\Http\Controllers\V1\Controller::class, 'profile'])->name('profile')->middleware('auth');
 
-       Route::post('/{name}/setImage', [\App\Http\Controllers\V1\UserController::class, 'setImage'])->name('profile.set.image');
+       Route::post('/{id}/setImage', [\App\Http\Controllers\V1\UserController::class, 'setImage'])->name('profile.set-image');
 
     });
 

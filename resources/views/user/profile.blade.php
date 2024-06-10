@@ -55,7 +55,7 @@
                         <div class="tab-content " id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel"
                                  aria-labelledby="v-pills-dashboard-tab">
-                                <div class="tabs-content__single">
+                                <div class="tabs-content__single"><!--  About User -->
                                     @if($user == null)
                                         Данного пользователя не существует
                                     @else
@@ -69,17 +69,21 @@
                             </div>
 
                             <div class="tab-pane fade" id="v-pills-orders" role="tabpanel"
-                                 aria-labelledby="v-pills-orders-tab"> <!--  About User -->
+                                 aria-labelledby="v-pills-orders-tab"> <!--  Set Image -->
+
+                                current image:
+
+                                <img src="{{asset('storage/' . $user->image)}}" alt="" style="border-radius: 50%; width: 200px; height: 180px"/>
+
+                                <form action="{{route('profile.set-image', $user->id)}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="image">
+                                    <button type="submit" class="btn-primary">Загрузить</button>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="v-pills-downloads" role="tabpanel"
-                                 aria-labelledby="v-pills-downloads-tab"> <!--  Set Image -->
-                                current image:
-                                <img src="{{asset('storage' . $user->image)}}" alt=""/>
-                                    <form action="{{route('profile.set-image')}}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="image">
-                                        <button type="submit">Загрузить</button>
-                                    </form>
+                                 aria-labelledby="v-pills-downloads-tab">
+
                             </div>
                             <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
                                  aria-labelledby="v-pills-address-tab">
