@@ -27,7 +27,6 @@ class Mail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('john.doe@example.org', 'Laravel'),
             subject: 'Mail',
         );
     }

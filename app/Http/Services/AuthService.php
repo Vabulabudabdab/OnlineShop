@@ -58,12 +58,11 @@ class AuthService {
         try {
             DB::beginTransaction();
 
-            $user = Auth::user();
+            $user = User::all()->where('email', $email)->first();
 
             $user->update([
                 'password' => $hashed_password,
             ]);
-//            $user->save();
 
             SendRestorePasswordToUserJob::dispatch($data, $password);
             Session::put('reminder_pass', 'Не забудьте сменить пароль!');
@@ -92,12 +91,17 @@ class AuthService {
     }
 
     public function getLoginCookie() {
-        $response = [
-            $_COOKIE['email'],
-            $_COOKIE['password'],
-            $_COOKIE['check'],
-        ];
 
+        if(!empty($_COOKIE['email'])){
+            $response = [
+
+                $_COOKIE['email'],
+                $_COOKIE['password'],
+                $_COOKIE['check'],
+            ];
+        }   else {
+            $response = null;
+        }
         return $response;
     }
 
