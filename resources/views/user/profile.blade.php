@@ -61,7 +61,7 @@
                                     @else
                                         <h4><span>Привет, {{$user->name}} {{$user->id}}</span></h4>
 
-
+                                        <img src="{{asset('storage/' . $user->image)}}" alt="" style="border-radius: 50%; width: 200px; height: 180px"/>
                                     <h5>From your account dashboard you can view your <span>Recent Orders, manage your
                                             shipping</span> and <span>billing addresses,</span> and edit your
                                         <span>Password and account details</span></h5>

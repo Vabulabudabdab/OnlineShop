@@ -162,7 +162,11 @@
                                     <li><a href="compare.html"> Compare </a></li>
                                     <li><a href="wishlist.html"> Wishlist </a></li>
                                     <li><a href="order-track.html"> Order Track </a></li>
+                                    @if(!empty(auth()->user()))
                                     <li><a href="{{route('profile', auth()->user()->name )}}"> My Account </a></li>
+                                    @else
+                                        <li><a href="{{route('register.get')}}"> Register </a></li>
+                                    @endif
                                     <li><a href="faq.html"> FAQ </a></li>
                                     <li><a href="error.html"> 404 </a></li>
                                     <li><a href="shop-grid.html">Shop Grid </a></li>
@@ -212,7 +216,13 @@
                                             /
                                             <a href="{{route('login.get')}}">Sign In  </a>
                                         @else()
-                                            <a href="{{route('logout')}}">Logout</a>
+                                            <a href="{{route('logout')}}"> Logout </a>
+                                        @endif
+
+                                        @if(auth()->user() && auth()->user()->email_verified_at == null)
+                                            <a href="{{route('verification.notice')}}"> Verified </a>
+                                        @else
+
                                         @endif
 
                                     </div>
@@ -362,10 +372,15 @@
                                                                                 <li><a href="order-track.html">Order
                                                                                         Track </a>
                                                                                 </li>
+                                                                                @if(!empty(auth()->user()))
                                                                                 <li><a href="{{route('profile', auth()->user()->name )}}">My
                                                                                         Account </a>
                                                                                 </li>
-                                                                        
+                                                                                @else
+                                                                                    <li><a href="{{route('register.get' )}}">My
+                                                                                            Account </a>
+                                                                                    </li>
+                                                                                @endif
                                                                                 <li><a href="blog.html">Blog</a>
                                                                                 </li>
                                                                                 <li><a href="blog-single.html">Blog
@@ -451,7 +466,11 @@
                                                         <li><a href="contact.html">Contact</a></li>
                                                         <li><a href="faq.html">FAQ</a></li>
                                                         <li><a href="order-track.html">Order_Track</a></li>
+                                                        @if(!empty(auth()->user()))
                                                         <li><a href="{{route('profile', auth()->user()->name )}}">My_Account</a></li>
+                                                        @else
+                                                        <li><a href="{{route('register.get')}}">Register</a></li>
+                                                        @endif
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown-list"> <a href="contact.html">Contact</a> </li>
@@ -461,8 +480,17 @@
 
                                         <div class="right d-flex align-items-center justify-content-end">
                                             <ul class="main-menu__widge-box d-flex align-items-center ">
-                                                <li class="d-lg-block d-none"><a href="{{route('profile', auth()->user()->name)}}"><i
-                                                            class="flaticon-user"></i> </a></li>
+                                                @if(!empty(auth()->user()))
+                                                <li class="d-lg-block d-none">
+                                                    <a href="{{route('profile', auth()->user()->name)}}"><i
+                                                            class="flaticon-user"></i> </a>
+                                                </li>
+                                                @else
+                                                    <li class="d-lg-block d-none">
+                                                        <a href="{{route('register.get')}}"><i
+                                                                class="flaticon-user"></i> </a>
+                                                    </li>
+                                                @endif
                                                 <li class="d-lg-block d-none"><a href="wishlist.html"
                                                                                  class="number"><i class="flaticon-heart"></i> <span
                                                             class="count">(2)</span> </a> </li>
@@ -646,9 +674,15 @@
                                                                     <li><a href="order-track.html">Order
                                                                             Track </a>
                                                                     </li>
+                                                                    @if(!empty(auth()->user()))
                                                                     <li><a href="{{route('profile', auth()->user()->name )}}">My
                                                                             Account </a>
                                                                     </li>
+                                                                    @else
+                                                                        <li><a href="{{route('register.get')}}">My
+                                                                                Account </a>
+                                                                        </li>
+                                                                    @endif
                                                                     <li><a href="blog.html">Blog</a>
                                                                     </li>
                                                                     <li><a href="blog-single.html">Blog
@@ -734,7 +768,11 @@
                                             <li><a href="contact.html">Contact</a></li>
                                             <li><a href="faq.html">FAQ</a></li>
                                             <li><a href="order-track.html">Order_Track</a></li>
+                                            @if(!empty(auth()->user()))
                                             <li><a href="{{route('profile', auth()->user()->name )}}">My_Account</a></li>
+                                            @else
+                                                <li><a href="{{route('register.get' )}}">Register</a></li>
+                                            @endif
                                         </ul>
                                     </li>
                                     <li class="dropdown-list"> <a href="contact.html">Contact</a> </li>
@@ -840,7 +878,11 @@
                             <h4> Useful Links </h4>
                         </div>
                         <ul class="footer-links">
-                            <li><a href="{{route('profile', auth()->user()->name )}}">Account</a></li>
+                            @if(!empty(auth()->user()))
+                                <li><a href="{{route('profile', auth()->user()->name )}}">Account</a></li>
+                            @else
+                                <li><a href="{{route('register.get' )}}">Register</a></li>
+                            @endif
                             <li><a href="{{route('login')}}">Sign In</a></li>
                             <li><a href="cart.html">View Cart</a></li>
                             <li><a href="wishlist.html">My WishList</a></li>

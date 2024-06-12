@@ -21,6 +21,7 @@ class UserService {
         try {
         DB::beginTransaction();
 
+        $user = Auth::user();
         $currentImage = $data['image'];
         $id = auth()->user()->id;
 

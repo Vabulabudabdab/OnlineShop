@@ -2,9 +2,7 @@
 
 namespace App\Http\Services;
 
-use App\Jobs\RegisterUserJob;
 use App\Jobs\SendRestorePasswordToUserJob;
-use App\Mail\User\Password;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -33,10 +31,8 @@ class AuthService {
                 ]
             );
 
-
             Auth::login($user);
             event(new Registered($user));
-//            RegisterUserJob::dispatch($user); Пока-что не работает, нужно кое-что проверить
             DB::commit();
         } catch (Exception $exception) {
             abort(500);
@@ -62,10 +58,12 @@ class AuthService {
         try {
             DB::beginTransaction();
 
-            $user = User::where('email', $email)->first();
+            $user = Auth::user();
 
-            $user->password = $hashed_password;
-            $user->save();
+            $user->update([
+                'password' => $hashed_password,
+            ]);
+//            $user->save();
 
             SendRestorePasswordToUserJob::dispatch($data, $password);
             Session::put('reminder_pass', 'Не забудьте сменить пароль!');
