@@ -11,13 +11,10 @@ class LoginController extends BaseController {
 
         $data = $request->validated();
 
-        if(isset($_POST['check'])) {
-            $_POST['check'] = true;
-            $this->service->setLoginCookie($data);
+        if($this->service->login($data)) {
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('login.get')->with('error_login', 'Неверный логин или пароль');
         }
-
-        $this->service->login($data);
-        return redirect()->route('home');
     }
-
 }

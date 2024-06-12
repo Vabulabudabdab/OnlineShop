@@ -11,4 +11,9 @@ Route::prefix('/home')->group(
     base_path('routes/verify/routes.php')
 );
 
+Route::prefix('/admin')->group(
+    base_path('routes/admin/routes.php')
+)->middleware(['owner', 'auth', 'verify']);
+
+
 Auth::routes(['verify' => true]);

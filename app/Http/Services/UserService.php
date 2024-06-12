@@ -2,7 +2,6 @@
 
 namespace App\Http\Services;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +15,7 @@ class UserService {
 
         return $result;
     }
-    public function UserSetImage($data, $user) {
+    public function UserSetImage($data) {
 
         try {
         DB::beginTransaction();

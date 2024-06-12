@@ -3,18 +3,20 @@
 namespace App\Http\Services;
 
 use App\Jobs\SendRestorePasswordToUserJob;
+use App\Mail\User\Password;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
 
 class AuthService {
 
-    public function register($data) {
+    public function register($data) : void {
 
         $password = Hash::make($data['password']);
         $data['password'] = $password;
@@ -33,6 +35,7 @@ class AuthService {
 
             Auth::login($user);
             event(new Registered($user));
+
             DB::commit();
         } catch (Exception $exception) {
             abort(500);
@@ -40,19 +43,22 @@ class AuthService {
         }
     }
 
-    public function login($data) {
+    public function login($data): bool {
 
-        if (Auth::attempt($data)) {
-            return redirect()->route('home');
+        if(isset($_POST['check'])) {
+            $this->setLoginCookie($data);
         }
+
+        $status = Auth::attempt($data);
+
+        return $status;
     }
 
-    public function password_restore($data) {
+    public function password_restore($data) : void {
 
         $email = $data['email'];
 
-        $password = Str::random(10);
-
+        $password = Str::random(17);
         $hashed_password = Hash::make($password);
 
         try {
@@ -64,18 +70,19 @@ class AuthService {
                 'password' => $hashed_password,
             ]);
 
-            SendRestorePasswordToUserJob::dispatch($data, $password);
+//            SendRestorePasswordToUserJob::dispatch($data, $password); bag idk how fixed it
+            Mail::to($email)->send(new Password($password));
             Session::put('reminder_pass', 'Не забудьте сменить пароль!');
             DB::commit();
         } catch (\Exception $exception) {
             abort(500);
             DB::rollBack();
         }
-
     }
 
 
-    public function setLoginCookie($data){
+
+    public function setLoginCookie($data) {
 
         if(!empty($this->getLoginCookie())) {
             unset($_COOKIE['email'], $_COOKIE['password'], $_COOKIE['check']);
@@ -99,7 +106,7 @@ class AuthService {
                 $_COOKIE['password'],
                 $_COOKIE['check'],
             ];
-        }   else {
+        }  else {
             $response = null;
         }
         return $response;

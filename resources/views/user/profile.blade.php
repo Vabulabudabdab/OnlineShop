@@ -29,26 +29,42 @@
                     <!--Start My Account Page Menu-->
                     <div class="col-xl-3 col-lg-4">
                         <div class="d-flex align-items-start">
+                            @if($user == null || $user->id !== auth()->user()->id)
+                            @else
                             <div class="nav my-account-page__menu flex-column nav-pills me-3" id="v-pills-tab"
                                  role="tablist" aria-orientation="vertical">
-                                @if($user->id !== auth()->user()->id)
-                                    @else
+
+
                                 <button class="nav-link active"
-                                                                                     id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard"
-                                                                                     type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true">
-                                    <span>About User</span> </button> <button class="nav-link" id="v-pills-orders-tab"
-                                                                              data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab"
-                                                                              aria-controls="v-pills-orders" aria-selected="false"> <span>Set Image</span> </button>
+                                        id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard"
+                                        type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true">
+                                    <span>About User</span>
+                                </button>
+
+                                <button class="nav-link" id="v-pills-orders-tab"
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab"
+                                        aria-controls="v-pills-orders" aria-selected="false">
+                                    <span>Set Image</span>
+                                </button>
+
                                 <button class="nav-link" id="v-pills-downloads-tab" data-bs-toggle="pill"
                                         data-bs-target="#v-pills-downloads" type="button" role="tab"
-                                        aria-controls="v-pills-downloads" aria-selected="false"> <span> Downloads</span>
-                                </button> <button class="nav-link" id="v-pills-address-tab" data-bs-toggle="pill"
-                                                  data-bs-target="#v-pills-address" type="button" role="tab"
-                                                  aria-controls="v-pills-address" aria-selected="false"> <span> Address</span>
-                                </button> <button class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill"
-                                                  data-bs-target="#v-pills-account" type="button" role="tab"
-                                                  aria-controls="v-pills-account" aria-selected="false"> <span> Account Details</span>
-                                </button> <a href="{{route('logout')}}"> <span> Logout </span></a>@endif </div>
+                                        aria-controls="v-pills-downloads" aria-selected="false">
+                                    <span> Downloads</span>
+                                </button>
+
+                                <button class="nav-link" id="v-pills-address-tab" data-bs-toggle="pill"
+                                        data-bs-target="#v-pills-address" type="button" role="tab"
+                                        aria-controls="v-pills-address" aria-selected="false"> <span> Address</span>
+                                </button>
+
+                                <button class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill"
+                                        data-bs-target="#v-pills-account" type="button" role="tab"
+                                        aria-controls="v-pills-account" aria-selected="false"> <span> Account Details</span>
+                                </button>
+
+                                <br>
+                                <a href="{{route('logout')}}"> <span> Logout </span></a>@endif </div>
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -59,8 +75,10 @@
                                     @if($user == null)
                                         Данного пользователя не существует
                                     @else
+                                        @if($user->role_id == 1)
+                                            <a href="{{route('admin.index.page')}}">Admin Panel</a>
+                                        @endif
                                         <h4><span>Привет, {{$user->name}} {{$user->id}}</span></h4>
-
                                         <img src="{{asset('storage/' . $user->image)}}" alt="" style="border-radius: 50%; width: 200px; height: 180px"/>
                                     <h5>From your account dashboard you can view your <span>Recent Orders, manage your
                                             shipping</span> and <span>billing addresses,</span> and edit your

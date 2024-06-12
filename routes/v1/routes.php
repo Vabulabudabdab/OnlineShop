@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\V1\Controller::class, 'home'])->name('home');
@@ -19,7 +18,6 @@ Route::group(['prefix' => 'home'],  function () {
     });
 
 });
-
 
 Route::group(['prefix' => 'auth'],  function () {
 

@@ -37,6 +37,10 @@
                                         {{Session::get('reminder_pass')}}
                                         {{Session::forget('reminder_pass')}}
                                     @endif
+                                    @if(!empty(Session::get('error_login')))
+                                        {{Session::get('error_login')}}
+                                        {{Session::forget('error_login')}}
+                                    @endif
                                 </div></p>
                             </div>
                             <form action="{{route('login.post')}}" method="POST" class="common-form">
@@ -51,7 +55,7 @@
                                     <div class="icon icon-2 "><i class="flaticon-visibility"></i> </div>
                                 </div>
                                 <div class="checkk ">
-                                    <div class="form-check p-0 m-0"> <input type="checkbox" id="remember" checked="{{!empty($_COOKIE['check']) == 1 ? 'checked' : ''}}"  name="check"> <label
+                                    <div class="form-check p-0 m-0"> <input type="checkbox" id="remember" checked="{{!empty($_COOKIE['check']) == 'on' ? 'checked' : ''}}"  name="check"> <label
                                             class="p-0" for="remember"> Remember Me</label> </div> <a href="{{route('password.restore')}}"
                                                                                                       class="forgot"> Forgot Password?</a>
                                 </div>
