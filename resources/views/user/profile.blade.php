@@ -75,7 +75,7 @@
                                     @if($user == null)
                                         Данного пользователя не существует
                                     @else
-                                        @if($user->role_id == 1)
+                                        @if(auth()->user()->role_id == 1 && $user->name == auth()->user()->name)
                                             <a href="{{route('admin.index.page')}}">Admin Panel</a>
                                         @endif
                                         <h4><span>Привет, {{$user->name}} {{$user->id}}</span></h4>

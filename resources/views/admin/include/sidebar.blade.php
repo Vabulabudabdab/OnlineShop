@@ -16,7 +16,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('admin.users.index.page')}}" class="nav-link">
+                <a href="{{route('admin.users.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-home"></i>
                     <p>
                         Управление пользователями

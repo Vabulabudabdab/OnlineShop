@@ -5,6 +5,7 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Carbon::setLocale('ru_RU');
+        Paginator::useBootstrap();
     }
 }
