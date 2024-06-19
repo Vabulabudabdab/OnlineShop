@@ -2,6 +2,10 @@
 
 namespace App\DataTransferObject;
 
+use Illuminate\Filesystem\FilesystemAdapter;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\Rules\ImageFile;
+
 class UpdateUserDTO {
     /**
      * @param string $email
@@ -10,8 +14,9 @@ class UpdateUserDTO {
      */
     public function __construct(
 
+        public string $name,
         public string $email,
-        public     [] $image,
+        public string  $image,
         public int $role_id,
 
     ) {}

@@ -2,11 +2,18 @@
 
 namespace App\Http\Services;
 
+use App\DataTransferObject\CreateUserDTO;
 use App\DataTransferObject\UpdateUserDTO;
+use App\Jobs\SendPasswordToUserJob;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Testing\Fluent\Concerns\Has;
+use PHPUnit\Exception;
 
 class UserService {
 
@@ -21,11 +28,62 @@ class UserService {
     }
 
     /**
+     * Create User Function
+     * @param CreateUserDTO $dto
+     * @return void
+     */
+
+    public function store(CreateUserDTO $dto) {
+
+        $email = $dto->email;
+
+        $password = $dto->password;
+        $hashed_password = Hash::make($password);
+
+        try {
+            DB::beginTransaction();
+
+            $user = User::firstOrCreate([
+                'name' => $dto->name,
+                'email' => $dto->email,
+                'password' => $hashed_password,
+                'role_id' => $dto->role_id,
+                'image' => $dto->image,
+            ]);
+
+            SendPasswordToUserJob::dispatch($email, $password, $user);
+
+            Session::put('success_create_user', "Пользователь успешно добавлен!");
+            $success = Session::get('success_create_user');
+
+            DB::commit();
+        } catch (Exception $exception) {
+            abort(500);
+            Session::put('error_create_user', "При добавлении пользователя произошла ошибка");
+            $error = Session::get('error_create_user');
+            DB::rollBack();
+        }
+
+        if ($success !== null) {
+            $path = redirect()->route('admin.users.show', $user->id);
+        } elseif ($error !== null) {
+            $path = redirect()->route('admin.users.create');
+        }
+
+        return $path;
+    }
+
+    static function getUnHashedPassword() {
+        $password = Str::random(17);
+        return $password;
+    }
+
+    /**
      * setProfileImage
      * @param $data
      */
 
-    public function UserSetImage($data) : void{
+    public function UserSetImage($data) : void {
 
         try {
         DB::beginTransaction();
@@ -64,7 +122,7 @@ class UserService {
             DB::beginTransaction();
 
             $user_name = $request->user_name;
-            $users = User::select('*')->where('name', 'LIKE', "%{$user_name}%")->get();
+            $users = User::where('name', 'LIKE', "%{$user_name}%")->get();
 
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -75,6 +133,8 @@ class UserService {
     /**
      *  Admin panel
      *  update user method
+     * @param $dto(name,email,image,role_id)
+     * @param $user(Model User from route $user->id)
  */
 
     public function update(UpdateUserDTO $dto, User $user) : void {
@@ -82,10 +142,17 @@ class UserService {
         try {
             DB::beginTransaction();
 
+            $oldImage = DB::table('users')->select('image')->where('id', $user->id)->get()->first();
+
+            if ($oldImage->image != null) {
+                Storage::disk('public')->delete('/images', $oldImage->image);
+            }
+
             $user->update([
+                'name' => $dto->name,
                 'email' => $dto->email,
-                'image' => $dto->image,
-                'role_i' => $dto->role_id
+                'image' => $dto->image, //from UpdateController var $image return file_path
+                'role_id' => $dto->role_id
             ]);
 
             DB::commit();
@@ -96,7 +163,23 @@ class UserService {
 
     }
 
-    public function delete(User $user) {
+    /**
+     * put image to storage/public/images and get file_path
+     * */
+
+    public function image($image) {
+
+        $file_path = Storage::disk('public')->put('/images', $image);
+
+        return $file_path;
+    }
+
+    /**
+     * @param User $user
+     * @return void
+     */
+
+    public function delete(User $user) : void {
         $user->delete();
     }
 

@@ -12,7 +12,9 @@ class UpdateController extends BaseController {
 
         $data = $request->validated();
 
-        $this->service->update(new UpdateUserDTO($data['email'], $data['image'], $data['role_id']), $user);
+        $image = $this->service->image($data['image']);
+
+        $this->service->update(new UpdateUserDTO($data['name'], $data['email'], $image, $data['role_id']), $user);
 
         return redirect()->route('admin.users.show', $user);
     }

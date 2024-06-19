@@ -10,8 +10,8 @@
                 <div class="row mb-2">
                     <div class="col-sm-6 d-flex align-items-center">
                         <h1 class="m-0 mr-2">{{$user->name}}</h1>
-                        <a href="" class="text-success"><i class="fas fa-pencil-alt"></i></a>
-                        <form action="" method="post">
+                        <a href="{{route('admin.users.edit', $user->id)}}" class="text-success"><i class="fas fa-pencil-alt"></i></a>
+                        <form action="{{route('admin.users.delete', $user->id)}}" method="post">
                             {{csrf_field()}}
                             @method('DELETE')
                             <button type="submit" class="border-0 bg-transparent" onclick="alert('Are you shore?')">
@@ -31,6 +31,10 @@
         <!-- /.content-header -->
 
         <!-- Register content -->
+        @if(!empty(Session::get('success_create_user')))
+            {{Session::get('success_create_user')}}
+            {{Session::forget('success_create_user')}}
+        @endif
         <section class="content">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
@@ -40,6 +44,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Текущий пользователь</h3>
                             </div>
+
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
@@ -48,6 +53,12 @@
                                         <td>ID</td>
                                         <td>{{$user->id}}</td>
                                     </tr>
+
+                                    <tr>
+                                        <td>Image</td>
+                                        <td><img src="{{asset('storage/' . $user->image)}}" alt="image" style="width: 200px; height: 100px"/></td>
+                                    </tr>
+
                                     <tr>
                                         <td>Имя пользователя</td>
                                         <td>{{$user->name}}</td>

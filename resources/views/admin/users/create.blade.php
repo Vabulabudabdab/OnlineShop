@@ -1,6 +1,7 @@
 @extends('layouts.admin.layout')
 
 @section('content')
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -26,33 +27,43 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h5>Редактирование пользователя</h5>
-                        <form action="{{route('admin.users.update', $user->id)}}" method="post" class="w-25" enctype="multipart/form-data">
+                        <h5>Добавление пользователя</h5>
+                        @if(!empty(Session::get('error_create_user')))
+                            {{Session::get('error_create_user')}}
+                            {{Session::forget('error_create_user')}}
+                        @endif
+
+                        <form action="{{route('admin.users.create.store')}}" method="post" class="w-25" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label>Имя пользователя</label>
-                                <input type="text" class="form-control" placeholder="Имя пользователя" name="name" value="{{$user->name}}">
-                                @error('name')
+                                <input type="text" class="form-control" placeholder="Имя пользователя" name="name" value="{{old('name')}}">
+                                @error('title')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label>Аватар пользователя</label>
-                                <br>
-                                <img src="{{asset('storage/' . $user->image)}}" alt="anime_tyan" style="width: 210px; height: 110px;">
-                                <input type="file" name="image" value="{{old('image')}}">
+                                <label>Эл.Почта</label>
+                                <input type="email" class="form-control" placeholder="Email" name="email" value="{{old('email')}}">
+                                @error('email')
+                                <div class="text-danger">{{$message}}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label>Эл.Почта</label>
-                                <input type="email" class="form-control" placeholder="Email" name="email" value="{{$user->email}}">
-                                @error('email')
-                                <div class="text-danger">
-                                    {{$message}}
+                                <label for="exampleInputFile">Добавить картинку</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="image">
+                                        <label class="custom-file-label">Выберите изображение</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Загрузить</span>
+                                    </div>
                                 </div>
-                                @enderror
                             </div>
+
                             <div class="form-group">
                                 <label>Права пользователя</label>
                                 <select class="select2" name="role_id"  data-placeholder="Выберите роли" style="width: 100%;">
@@ -64,10 +75,7 @@
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <input type="hidden" name="user_id" value="{{$user->id}}">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Редактировать</button>
+                            <button type="submit" class="btn btn-primary">Добавить пользователя</button>
                         </form>
                     </div>
                 </div>
@@ -76,4 +84,5 @@
         </section>
         <!-- /.content -->
     </div>
-@endsection()
+
+@endsection

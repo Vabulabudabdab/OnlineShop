@@ -31,10 +31,10 @@
                 <div class="row">
 
                     <div class="col-md-1 mb-3">
-                        <a href="" class="btn btn-block btn-primary">Добавить</a>
+                        <a href="{{route('admin.users.create')}}" class="btn btn-block btn-primary">Добавить</a>
                     </div>
                     <div class="col-md-1 mb-3">
-                        <a href="" class="btn btn-block btn-primary">Восстановить</a>
+                        <a href="" class="btn btn-block btn-primary w-100" style="opacity: 0.5">Восстановить</a>
                     </div>
                 </div>
                 <div class="row">
