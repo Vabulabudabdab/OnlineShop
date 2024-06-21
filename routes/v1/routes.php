@@ -6,6 +6,7 @@ Route::get('/', [App\Http\Controllers\V1\Controller::class, 'home'])->name('home
 Route::get('/logout', \App\Http\Controllers\Auth\LogoutController::class)->name('logout');
 
 
+
 Route::group(['prefix' => 'home'],  function () {
 
     Route::get('/', [App\Http\Controllers\V1\Controller::class, 'home'])->name('home');

@@ -5,6 +5,7 @@
     <main class="overflow-hidden">
 
         <!-- newsLetter_popup Start -->
+        @if(auth()->user() && auth()->user()->subscribe_status == 0)
         <button data-mfp-src="#newsLetter-popup" class="modal-btn d-none"></button>
         <div id="newsLetter-popup" class="mfp-hide p-4" role="dialog">
             <div class="row align-items-center justify-content-sm-between">
@@ -13,6 +14,8 @@
                         <img src="assets/images/home-three/products-1.jpg" alt="newsletter">
                     </div>
                 </div>
+
+
                 <div class="col-lg-7 col-md-8 col-sm-10">
                     <div class="newsLetter-popup__content mb-4">
                         <div class="text-center"> <a href="index.html" class="logo"> <img
@@ -20,15 +23,21 @@
                             <h2> Join <span>with us.</span> </h2>
                             <p> Subscribe to receive news from Karte In a free hour </p>
                         </div>
-                        <form action="#0" class="newsLetter-popup__subscrib-form">
-                            <div class="input_box"> <input type="email" placeholder="Enter your email Address"
-                                                           name="email"> <button type="submit" class="subscribe_btn"> Submit </button> </div>
+
+                        <form action="" class="newsLetter-popup__subscrib-form">
+                            <div class="input_box">
+                                <input type="email" placeholder="Enter your email Address"
+                                                           name="email">
+                                <button type="submit" class="subscribe_btn"> Subscribe </button> </div>
                             <div class="form-group "> <input type="checkbox" id="html"> <label for="html"> By providing
                                     my information, I agree to Karte <a href="#0"> Privacy Policy</a> and <a href="#0">
                                         Legal Statement</a> </label> </div>
                         </form>
                     </div>
                 </div>
+                @else
+
+                @endif
             </div>
         </div>
 
@@ -966,7 +975,7 @@
                     <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.2s">
                         <div class="core-features__box d-flex ms-0"> <span class="one"></span> <span class="two"></span>
                             <div class="icon"> <img src="assets/images/icon/f-icon-1.png" alt=""> </div>
-                            <div class="core-features__box-content"> <a href="login.html" class="d-block">
+                            <div class="core-features__box-content"> <a href="{{route('login.get')}}" class="d-block">
                                     <h4> Secure Payment </h4>
                                 </a>
                                 <p>Everybody different which the why give offer styles for every body.</p>
@@ -976,7 +985,7 @@
                     <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.3s">
                         <div class="core-features__box d-flex "> <span class="one"></span> <span class="two"></span>
                             <div class="icon"> <img src="assets/images/icon/f-icon-2.png" alt=""> </div>
-                            <div class="core-features__box-content"> <a href="login.html" class="d-block">
+                            <div class="core-features__box-content"> <a href="{{route('login.get')}}" class="d-block">
                                     <h4> 27/7 Fast Delivery </h4>
                                 </a>
                                 <p>Everybody different which the why give offer styles for every body.</p>
@@ -986,7 +995,7 @@
                     <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.4s">
                         <div class="core-features__box d-flex "> <span class="one"></span> <span class="two"></span>
                             <div class="icon"> <img src="assets/images/icon/f-icon-3.png" alt=""> </div>
-                            <div class="core-features__box-content"> <a href="login.html" class="d-block">
+                            <div class="core-features__box-content"> <a href="{{route('login.get')}}" class="d-block">
                                     <h4> Return & Refund </h4>
                                 </a>
                                 <p>Everybody different which the why give offer styles for every body.</p>
@@ -996,7 +1005,7 @@
                     <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.5s">
                         <div class="core-features__box d-flex me-0"> <span class="one"></span> <span class="two"></span>
                             <div class="icon"> <img src="assets/images/icon/f-icon-4.png" alt=""> </div>
-                            <div class="core-features__box-content"> <a href="login.html" class="d-block">
+                            <div class="core-features__box-content"> <a href="{{route('login.get')}}" class="d-block">
                                     <h4> Quality Support </h4>
                                 </a>
                                 <p>Everybody different which the why give offer styles for every body.</p>

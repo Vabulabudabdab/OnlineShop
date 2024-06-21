@@ -883,7 +883,7 @@
                             @else
                                 <li><a href="{{route('register.get' )}}">Register</a></li>
                             @endif
-                            <li><a href="{{route('login')}}">Sign In</a></li>
+                            <li><a href="{{route('login.get')}}">Sign In</a></li>
                             <li><a href="cart.html">View Cart</a></li>
                             <li><a href="wishlist.html">My WishList</a></li>
                             <li><a href="compare.html">Compare Products</a></li>

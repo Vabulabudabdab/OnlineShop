@@ -33,6 +33,10 @@
                                 <h2>Login</h2>
                                 <p>Don't have an account yet? <a href="{{route('register.get')}}">Sign up for free</a></p>
                                 <p><div class="form-group" class="text-success">
+                                    @if (!empty(Session::get('banned')))
+                                        <div class="alert alert-danger">{{ Session::get('banned') }}</div>
+                                        {{Session::forget('banned')}}
+                                    @endif
                                     @if(!empty(Session::get('reminder_pass')))
                                         {{Session::get('reminder_pass')}}
                                         {{Session::forget('reminder_pass')}}

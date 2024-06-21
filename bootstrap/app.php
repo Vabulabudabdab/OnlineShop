@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'owner' => \App\Http\Middleware\OwnerMiddleWare::class,
             'auth' => \App\Http\Middleware\AuthMiddleWare::class,
             'verify' => \App\Http\Middleware\EmailVerificationMiddleWare::class,
+            'banned' => \App\Http\Middleware\CheckBanned::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

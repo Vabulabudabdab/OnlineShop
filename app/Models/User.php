@@ -9,12 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, SoftDeletes;
 
     protected $table = 'users';
     protected $fillable = ['name', 'email', 'password', 'image', 'role_id', 'remember_token'];
+
+    protected $dates = [
+        'banned_at'
+    ];
 
     const OWNER = 1;
     const ADMIN = 2;
