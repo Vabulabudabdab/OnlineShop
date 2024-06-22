@@ -30,7 +30,7 @@
                         <a href="{{route('admin.users.create')}}" class="btn btn-block btn-primary">Добавить</a>
                     </div>
                     <div class="col-md-1 mb-3">
-                        <a href="" class="btn btn-block btn-primary w-100" style="opacity: 0.5">Восстановить</a>
+                        <a href="#" class="btn btn-block btn-primary w-100" style="opacity: 0.5; cursor: default;">Восстановить</a>
                     </div>
                 </div>
 
@@ -64,7 +64,11 @@
                                     @foreach($users as $user)
                                         <tr>
                                             <td>{{$user->id}}</td>
+                                            @if(auth()->user()->id == $user->id)
+                                                <td class="text-primary">Вы: {{$user->name}}</td>
+                                            @else
                                             <td>{{$user->name}}</td>
+                                            @endif
                                             <td>{{$user->RoleTitle}}</td>
 
                                             <td class="text-center"><a href="{{route('admin.users.show', $user->id)}}"><i class="far fa-eye"></i></a></td>
@@ -81,7 +85,8 @@
 
                                             <td>
                                                 @if($user->banned_at == null)
-                                                <form action="{{route('admin.users.banned.post', $user->id)}}">
+                                                <form action="{{route('admin.users.banned.post', $user->id)}}" method="post">
+                                                    {{csrf_field()}}
                                                     <input type="date" width="312" name="ban_date" />
 
                                                     <button type="submit" class="btn-primary">Заблокировать</button>
@@ -95,7 +100,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                {{$users->links()}}
+
+                                {{ $users->links()}}
+
                             </div>
                             <!-- /.card-body -->
                         </div>

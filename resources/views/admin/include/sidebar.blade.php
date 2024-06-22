@@ -33,6 +33,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('admin.roles.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-home"></i>
+                    <p>
+                       Управление правами доступа
+                    </p>
+                </a>
+            </li>
 
         </ul>
     </div>

@@ -8,7 +8,7 @@ class IndexController {
 
     public function __invoke() {
 
-        $users = User::paginate(9);
+        $users = User::paginate(9, '*', 'user');
 
         return view('admin.users.index', compact('users'));
     }
