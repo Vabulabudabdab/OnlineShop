@@ -6,6 +6,7 @@ use App\DataTransferObject\CreateUserDTO;
 use App\DataTransferObject\UpdateUserDTO;
 use App\Jobs\SendPasswordToUserJob;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -181,6 +182,56 @@ class UserService {
 
     public function delete(User $user) : void {
         $user->delete();
+    }
+
+    /**
+     * return banned user where date lessThan now
+     */
+    public function showBanned() {
+
+        $current_date = Carbon::now();
+
+        $result = User::where('banned_at', '>', $current_date)->paginate(9);
+
+        return $result;
+    }
+
+    public function ban($data, User $user) {
+
+        $ban_date = $data['ban_date'];
+
+        try {
+            DB::beginTransaction();
+
+            $user->update([
+               'banned_at' => $ban_date
+            ]);
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            abort(500);
+            DB::rollBack();
+        }
+
+    }
+
+    /**
+     * @param User $user
+     * @return void
+     */
+
+    public function unBan(User $user) : void {
+
+        try {
+            DB::beginTransaction();
+            $user->update([
+                'banned_at' => null
+            ]);
+            DB::commit();
+        } catch (\Exception $exception) {
+            abort(500);
+            DB::rollBack();
+        }
     }
 
 }

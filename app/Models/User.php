@@ -15,7 +15,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable, SoftDeletes;
 
     protected $table = 'users';
-    protected $fillable = ['name', 'email', 'password', 'image', 'role_id', 'remember_token'];
+    protected $fillable = ['name', 'email', 'password', 'image', 'role_id', 'remember_token', 'banned_at'];
 
     protected $dates = [
         'banned_at'
@@ -39,14 +39,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->getRoleName()[$this->role_id];
     }
 
-
     public function sendEmailVerificationNotification() {
         $this->notify(new SendVerifyWithQueueNotification());
     }
 
-    public function role() {
+    public function role_id() {
         return $this->hasOne(Role::class, 'role_id', 'id');
     }
+
 
 }
 

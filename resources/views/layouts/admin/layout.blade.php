@@ -104,6 +104,9 @@
     $('.select2').select2()
 
 </script>
+<script>
+    $('#datepicker').datepicker({ uiLibrary: 'bootstrap5', format: 'yyyy-dd-mm' });
+</script>
 <style>
     .custom-file-input:lang(en)~.custom-file-label::after {
         content: ". . .";

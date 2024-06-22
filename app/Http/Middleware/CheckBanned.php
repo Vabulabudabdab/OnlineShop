@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class CheckBanned
@@ -14,12 +15,16 @@ class CheckBanned
             $ban_time = auth()->user()->banned_at;
 
             $banned_days = now()->diffInDays($ban_time);
-            auth()->logout();
+            $banned_hours = now()->diffInHours($ban_time);
+
+            Auth::logout();
 
             if ($banned_days > 14) {
                 $message = 'Your account has been banned. Please contact administrator.';
-            } else {
+            } elseif($banned_days < 14 && $banned_hours > 24) {
                 $message = 'Your account has been banned for '.Str::CutToFirstPoint($banned_days).' day ' . 'Please contact administrator.';
+            } else {
+                $message = 'Your account has been banned for '.Str::CutToFirstPoint($banned_hours).' hours ' . 'Please contact administrator.';
             }
 
             return redirect()->route('login.get')->with('banned', $message);

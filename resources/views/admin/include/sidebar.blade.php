@@ -15,6 +15,7 @@
                     </p>
                 </a>
             </li>
+
             <li class="nav-item">
                 <a href="{{route('admin.users.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-home"></i>
@@ -24,6 +25,14 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{route('admin.users.banned')}}" class="nav-link">
+                    <i class="nav-icon fas fa-home"></i>
+                    <p>
+                        Заблокированные пользователи
+                    </p>
+                </a>
+            </li>
 
         </ul>
     </div>
