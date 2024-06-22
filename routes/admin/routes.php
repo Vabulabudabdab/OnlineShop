@@ -25,9 +25,10 @@ Route::group(['middleware' => 'owner', 'auth', 'verify'],function () {
         Route::post('/search', \App\Http\Controllers\Admin\Users\SearchController::class)->name('admin.users.search');
         Route::post('/create/store', \App\Http\Controllers\Admin\Users\StoreController::class)->name('admin.users.create.store');
         Route::post('/edit/{user}/update', \App\Http\Controllers\Admin\Users\UpdateController::class)->name('admin.users.update');
-        Route::post('/edit/{user}/update', \App\Http\Controllers\Admin\Users\UnBanController::class)->name('admin.users.unban');
+        Route::post('/ban/{user}', \App\Http\Controllers\Admin\Users\BannedPostController::class)->name('admin.users.banned.post');
 
-        Route::get('/ban/{user}', \App\Http\Controllers\Admin\Users\BannedPostController::class)->name('admin.users.banned.post');
+        Route::post('/ban/{user}/unban', \App\Http\Controllers\Admin\Users\UnBanController::class)->name('admin.users.unban');
+
 
         Route::delete('/delete/{user}', \App\Http\Controllers\Admin\Users\DeleteController::class)->name('admin.users.delete');
 

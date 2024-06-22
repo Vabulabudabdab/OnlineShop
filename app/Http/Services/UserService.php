@@ -202,7 +202,7 @@ class UserService {
      * @return void
      */
 
-    public function ban($data, User $user) {
+    public function ban($data, User $user) : void {
 
         $ban_date = $data['ban_date'];
 
