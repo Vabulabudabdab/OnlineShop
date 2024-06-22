@@ -196,6 +196,12 @@ class UserService {
         return $result;
     }
 
+    /**
+     * @param $data
+     * @param User $user
+     * @return void
+     */
+
     public function ban($data, User $user) {
 
         $ban_date = $data['ban_date'];
