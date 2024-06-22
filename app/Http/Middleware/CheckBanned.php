@@ -11,7 +11,7 @@ class CheckBanned
     {
         if (auth()->check() && auth()->user()->banned_at && now()->lessThan(auth()->user()->banned_at)) {
 
-            $ban_time =  auth()->user()->banned_at;
+            $ban_time = auth()->user()->banned_at;
 
             $banned_days = now()->diffInDays($ban_time);
             auth()->logout();
