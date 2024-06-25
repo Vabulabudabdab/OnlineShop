@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -46,6 +47,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role_id() {
         return $this->hasOne(Role::class, 'role_id', 'id');
     }
+
+    public function ban($ban_date) {
+        try {
+            DB::beginTransaction();
+
+            $user->update([
+                'banned_at' => $ban_date
+            ]);
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            abort(500);
+            DB::rollBack();
+        }
+    }
+
+
 
 
 }

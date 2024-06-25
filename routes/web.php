@@ -17,7 +17,6 @@ Route::group(['middleware' => 'banned'], function () {
         base_path('routes/admin/routes.php')
     )->middleware(['owner', 'auth', 'verify']);
 
-
 });
 
 

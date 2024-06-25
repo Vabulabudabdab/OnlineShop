@@ -44,7 +44,24 @@ Route::group(['middleware' => 'owner', 'auth', 'verify'],function () {
        /**
         * Post Routes
         */
-//       Route::post();
+    });
+
+    Route::group(['prefix' => 'rooms'], function () {
+
+        /**
+         * Get Routes
+         */
+
+        Route::get('/', \App\Http\Controllers\Admin\Room\IndexController::class)->name('admin.rooms.index');
+        Route::get('/create', \App\Http\Controllers\Admin\Room\CreateController::class)->name('admin.rooms.create');
+        Route::get('/{url}', \App\Http\Controllers\Admin\Room\ShowController::class)->name('admin.rooms.show');
+
+        /**
+         * Post Routes
+         */
+
+        Route::post('/create/store', \App\Http\Controllers\Admin\Room\StoreController::class)->name('admin.rooms.store');
+
     });
 
 });

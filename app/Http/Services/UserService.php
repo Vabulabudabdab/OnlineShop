@@ -205,20 +205,7 @@ class UserService {
     public function ban($data, User $user) : void {
 
         $ban_date = $data['ban_date'];
-
-        try {
-            DB::beginTransaction();
-
-            $user->update([
-               'banned_at' => $ban_date
-            ]);
-
-            DB::commit();
-        } catch (\Exception $exception) {
-            abort(500);
-            DB::rollBack();
-        }
-
+        $user->ban($ban_date);
     }
 
     /**
