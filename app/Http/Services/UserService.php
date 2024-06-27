@@ -74,6 +74,10 @@ class UserService {
         return $path;
     }
 
+    /**
+     * @return string
+     */
+
     static function getUnHashedPassword() {
         $password = Str::random(17);
         return $password;
