@@ -48,7 +48,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Role::class, 'role_id', 'id');
     }
 
-    public function ban($ban_date) {
+    public function ban(User $user,$ban_date) {
+
         try {
             DB::beginTransaction();
 

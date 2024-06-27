@@ -67,12 +67,16 @@
                                             @if(auth()->user()->id == $user->id)
                                                 <td class="text-primary">Вы: {{$user->name}}</td>
                                             @else
-                                            <td>{{$user->name}}</td>
+                                                <td>{{$user->name}}</td>
                                             @endif
                                             <td>{{$user->RoleTitle}}</td>
 
-                                            <td class="text-center"><a href="{{route('admin.users.show', $user->id)}}"><i class="far fa-eye"></i></a></td>
-                                            <td class="text-center"><a href="{{route('admin.users.edit', $user->id)}}" class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
+                                            <td class="text-center"><a
+                                                    href="{{route('admin.users.show', $user->id)}}"><i
+                                                        class="far fa-eye"></i></a></td>
+                                            <td class="text-center"><a href="{{route('admin.users.edit', $user->id)}}"
+                                                                       class="text-success"><i
+                                                        class="fas fa-pencil-alt"></i></a></td>
                                             <td class="text-center">
                                                 <form action="{{route('admin.users.delete', $user->id)}}" method="POST">
                                                     {{csrf_field()}}
@@ -84,16 +88,17 @@
                                             </td>
 
                                             <td>
-                                                @if($user->banned_at == null)
-                                                <form action="{{route('admin.users.banned.post', $user->id)}}" method="post">
-                                                    {{csrf_field()}}
-                                                    <input type="date" width="312" name="ban_date" />
+                                                @if($user->banned_at == null || $user->banned_at < \Carbon\Carbon::now())
+                                                    <form action="{{route('admin.users.banned.post', $user->id)}}"
+                                                          method="post">
+                                                        {{csrf_field()}}
+                                                        <input type="date" width="312" name="ban_date"/>
 
-                                                    <button type="submit" class="btn-primary">Заблокировать</button>
+                                                        <button type="submit" class="btn-primary">Заблокировать</button>
 
-                                                </form>
-                                                @else
-                                                <div class="text-danger">Пользователь заблокирован</div>
+                                                    </form>
+                                                @elseif($user->banned_at > \Carbon\Carbon::now())
+                                                    <div class="text-danger">Пользователь заблокирован</div>
                                                 @endif
                                             </td>
                                         </tr>

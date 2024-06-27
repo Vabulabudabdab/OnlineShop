@@ -205,7 +205,7 @@ class UserService {
     public function ban($data, User $user) : void {
 
         $ban_date = $data['ban_date'];
-        $user->ban($ban_date);
+        $user->ban($user ,$ban_date);
     }
 
     /**
