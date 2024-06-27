@@ -3,10 +3,15 @@
 namespace App\Http\Services;
 
 use App\DataTransferObject\CreateRoomDTO;
+use App\Jobs\SendRoomNotificationToUserJob;
+use App\Mail\User\CreateRoom;
 use App\Models\Room;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Ramsey\Uuid\Uuid;
 
 class RoomService {
 
@@ -19,16 +24,21 @@ class RoomService {
         return $rooms;
     }
 
-    public function store(CreateRoomDTO $dto) {
-        $url = $dto->name;
-        $url = Crypt::encrypt($url);
+    /**
+     * @param CreateRoomDTO $dto
+     * @return Room|\Closure|null
+     */
 
+    public function store(CreateRoomDTO $dto) { //create room function
+
+        $url = (string) Uuid::uuid4();
         $owner = Auth::user()->id;
+        $email = Auth::user()->email;
 
         try {
             DB::beginTransaction();
 
-            Room::FirstOrCreate([
+            $room = Room::Create([
                 'owner_room' => $owner,
                 'status' => $dto->status,
                 'name' => $dto->name,
@@ -36,16 +46,26 @@ class RoomService {
                 'url' => $url
             ]);
 
+            $room_url = $room->url;
+
+//            SendRoomNotificationToUserJob::dispatch($room, $email);
+
+            Mail::to($email)->send(new CreateRoom($room_url, $email));
             DB::commit();
         } catch (\Exception $exception) {
+            dd($exception);
             abort(500);
+
             DB::rollback();
         }
 
-        $room = Room::all('url')->where('url', $url)->first();
-
-        return $room;
+        return $room_url;
     }
+
+    /**
+     * @param $url
+     * @return mixed
+     */
 
     public function getCurrentRoomInfo($url) {
         $room = Room::where('url', $url)->first();
@@ -53,12 +73,13 @@ class RoomService {
         return $room;
     }
 
-    public function getClearUrl($data) {
+    /**
+     * @param Room $room
+     * @return void
+     */
 
-        foreach ($data as $url) {
-            return $url;
-        }
-
+    public function delete(Room $room) : void {
+        $room->delete();
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\User\Password;
+use App\Mail\User\CreateRoom;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -10,25 +10,28 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendRestorePasswordToUserJob implements ShouldQueue
+class SendRoomNotificationToUserJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $data, $password;
     /**
      * Create a new job instance.
      */
-    public function __construct($data, $password) {
-        $this->data = $data;
-        $this->password = $password;
+
+    protected $room, $email;
+
+    public function __construct($room, $email) {
+        $this->room = $room;
+        $this->email = $email;
     }
 
     /**
      * Execute the job.
      */
     public function handle(): void {
-        $email = $this->data['email'];
-        $password = $this->password;
-        Mail::to($email)->send(new Password($password));
+        $url = $this->room->url;
+        $email = $this->email;
+
+        Mail::to($email)->send(new CreateRoom($url, $email));
     }
 }

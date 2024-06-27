@@ -33,6 +33,12 @@
                     </div>
                 </div>
 
+                @if(!empty(session('success_create_room')))
+                    <div class="text-success">{{session('success_create_room')}}</div>
+                @endif
+                @if(!empty(session('success_delete_room')))
+                    <div class="text-success">{{session('success_delete_room')}}</div>
+                @endif
 
                 <div class="row">
                     <div class="col-10">
@@ -40,9 +46,6 @@
                             <div class="card-header">
                                 <h3 class="card-title">Текущие комнаты</h3>
                             </div>
-                            @if(!empty(session('success_create_room')))
-                            {{session('success_create_room')}}
-                            @endif
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
@@ -70,10 +73,8 @@
                                                 <td>Room status can't be checked</td>
                                             @endif
                                             <td><a href="{{route('admin.rooms.show', $room->url)}}">Посетить</a></td>
-                                            <td class="text-center"><a href=""><i class="far fa-eye"></i></a></td>
-                                            <td class="text-center"><a href="" class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
                                             <td class="text-center">
-                                                <form action="" method="POST">
+                                                <form action="{{route('admin.rooms.delete', $room->id)}}" method="POST">
                                                     {{csrf_field()}}
                                                     @method('DELETE')
                                                     <button type="submit" class="border-0 bg-transparent">

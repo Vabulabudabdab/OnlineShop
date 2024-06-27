@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
 
 class Room extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $table = 'rooms';
     protected $fillable = ['owner_room', 'status', 'name', 'description', 'url'];

@@ -61,6 +61,7 @@ Route::group(['middleware' => 'owner', 'auth', 'verify'],function () {
          */
 
         Route::post('/create/store', \App\Http\Controllers\Admin\Room\StoreController::class)->name('admin.rooms.store');
+        Route::delete('/delete/{room}', \App\Http\Controllers\Admin\Room\DeleteController::class)->name('admin.rooms.delete');
 
     });
 
