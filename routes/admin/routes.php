@@ -29,7 +29,6 @@ Route::group(['middleware' => 'owner', 'auth', 'verify'],function () {
         Route::post('/ban/{user}/block', \App\Http\Controllers\Admin\Users\BannedPostController::class)->name('admin.users.banned.post');
         Route::post('/ban/{user}/unban', \App\Http\Controllers\Admin\Users\UnBanController::class)->name('admin.users.unban');
 
-
         Route::delete('/delete/{user}', \App\Http\Controllers\Admin\Users\DeleteController::class)->name('admin.users.delete');
 
     });

@@ -40,6 +40,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->getRoleName()[$this->role_id];
     }
 
+
+
     public function sendEmailVerificationNotification() {
         $this->notify(new SendVerifyWithQueueNotification());
     }

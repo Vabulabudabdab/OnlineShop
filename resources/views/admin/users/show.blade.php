@@ -73,6 +73,16 @@
                                         <td>Права доступа</td>
                                         <td>{{$user->RoleTitle}}</td>
                                     </tr>
+
+                                    <tr>
+                                        <td>Статус блокировки</td>
+                                        @if($user->banned_at != null && $user->banned_at >\Carbon\Carbon::now())
+                                        <td class="text-danger">Заблокирован</td>
+                                        @else
+                                        <td class="text-success">Блокировка отсутствует</td>
+                                        @endif
+                                    </tr>
+
                                     </tbody>
                                 </table>
                             </div>
