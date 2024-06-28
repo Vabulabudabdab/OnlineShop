@@ -24,7 +24,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{$users}}</h3>
+                                <h3>{{$data['users']}}</h3>
 
                                 <p>Пользователи</p>
                             </div>
@@ -54,7 +54,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{$data['categories']}}</h3>
 
                                 <p>Категории</p>
                             </div>
