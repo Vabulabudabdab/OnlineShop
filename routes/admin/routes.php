@@ -64,4 +64,21 @@ Route::group(['middleware' => 'owner', 'auth', 'verify'],function () {
 
     });
 
+    Route::group(['prefix' => 'category'], function () {
+
+        /**
+         * Get Routes
+         */
+
+        Route::get('/', \App\Http\Controllers\Admin\Category\IndexController::class)->name('admin.categories.index');
+        Route::get('/create', \App\Http\Controllers\Admin\Category\CreateController::class)->name('admin.categories.create');
+        Route::get('/show/{category}', \App\Http\Controllers\Admin\Category\ShowController::class)->name('admin.categories.show');
+
+        /**
+         * Post Routes
+         */
+        Route::post('/create/store', \App\Http\Controllers\Admin\Category\StoreController::class)->name('admin.categories.store.post');
+        Route::post('/delete/{category}', \App\Http\Controllers\Admin\Category\DeleteController::class)->name('admin.categories.delete');
+    });
+
 });

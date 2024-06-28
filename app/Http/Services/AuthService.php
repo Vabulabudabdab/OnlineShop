@@ -70,8 +70,8 @@ class AuthService {
                 'password' => $hashed_password,
             ]);
 
-//            SendRestorePasswordToUserJob::dispatch($data, $password); bag idk how fixed it
-            Mail::to($email)->send(new Password($password));
+            SendRestorePasswordToUserJob::dispatch($data, $password);
+//            Mail::to($email)->send(new Password($password));
             Session::put('reminder_pass', 'Не забудьте сменить пароль!');
             DB::commit();
         } catch (\Exception $exception) {

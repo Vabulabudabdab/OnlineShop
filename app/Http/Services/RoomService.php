@@ -7,10 +7,8 @@ use App\Jobs\SendRoomNotificationToUserJob;
 use App\Mail\User\CreateRoom;
 use App\Models\Room;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use Ramsey\Uuid\Uuid;
 
 class RoomService {
@@ -48,9 +46,8 @@ class RoomService {
 
             $room_url = $room->url;
 
-//            SendRoomNotificationToUserJob::dispatch($room, $email);
+            SendRoomNotificationToUserJob::dispatch($room, $email);
 
-            Mail::to($email)->send(new CreateRoom($room_url, $email));
             DB::commit();
         } catch (\Exception $exception) {
             dd($exception);
