@@ -7,7 +7,7 @@ use App\Models\Category;
 class EditController extends BaseController {
 
     public function __invoke(Category $category) {
-        return view('admin.category.edit', $category);
+        return view('admin.category.edit', compact('category'));
     }
 
 }

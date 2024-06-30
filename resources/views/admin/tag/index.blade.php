@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Категории</h1>
+                        <h1 class="m-0">Тэги</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.index.page')}}">Главная</a></li>
-                            <li class="breadcrumb-item active">Категории</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.tags.index')}}">Главная</a></li>
+                            <li class="breadcrumb-item active">Тэги</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -29,7 +29,7 @@
 
                 <div class="row">
                     <div class="col-md-1 mb-3">
-                        <a href="{{route('admin.categories.create')}}" class="btn btn-block btn-primary">Добавить</a>
+                        <a href="{{route('admin.tags.create')}}" class="btn btn-block btn-primary">Добавить</a>
                     </div>
                 </div>
 
@@ -37,7 +37,7 @@
                     <div class="col-10">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Текущие категории</h3>
+                                <h3 class="card-title">Текущие тэги</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
@@ -46,26 +46,18 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Название</th>
-                                        <th>Просмотр</th>
-                                        <th>Редактировать</th>
-                                        <th>Удалить</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($categories as $category)
+                                    @foreach($tags as $tag)
                                         <tr>
-                                            <td>{{$category->id}}</td>
-                                            <td>{{$category->title}}</td>
+                                            <td>{{$tag->id}}</td>
+                                            <td>{{$tag->title}}</td>
 
-                                            <td class="text-center"><a
-                                                    href="{{route('admin.categories.show', $category->id)}}"><i
-                                                        class="far fa-eye"></i></a></td>
-                                            <td class="text-center"><a href="{{route('admin.categories.edit', $category->id)}}"
-                                                                       class="text-success"><i
-                                                        class="fas fa-pencil-alt"></i></a></td>
-
+                                            <td><a href="{{route('admin.tags.show', $tag->id)}}">Просмотр</a></td>
+                                            <td><a href="{{route('admin.tags.edit', $tag->id)}}">Изменить</a></td>
                                             <td class="text-center">
-                                                <form action="{{route('admin.categories.delete', $category->id)}}" method="POST">
+                                                <form action="{{route('admin.tags.delete', $tag->id)}}" method="POST">
                                                     {{csrf_field()}}
                                                     @method('DELETE')
                                                     <button type="submit" class="border-0 bg-transparent">
@@ -79,7 +71,7 @@
                                     </tbody>
                                 </table>
 
-                                {{ $categories->links()}}
+                                {{ $tags->links()}}
 
                             </div>
                             <!-- /.card-body -->

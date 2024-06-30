@@ -39,9 +39,11 @@ class CategoryService {
      * @return Category
      */
 
-    public function update($data, Category $category) : Category {
+    public function update($data, Category $category) {
 
-        $title = $data['title'];
+        if(!empty($data['title'])) {
+            $title = $data['title'];
+        }
 
         try {
             DB::beginTransaction();
@@ -55,7 +57,6 @@ class CategoryService {
             abort(500);
             DB::rollBack();
         }
-
     }
 
     /**

@@ -13,7 +13,7 @@ class UpdateController extends BaseController {
 
         $this->service->update($data, $category);
 
-        return redirect()->route('admin.categories.show', $category);
+        return redirect()->route('admin.categories.show', compact('category'));
     }
 
 }

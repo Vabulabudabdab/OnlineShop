@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Категории</h1>
+                        <h1 class="m-0">Тэги</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin.index.page')}}">Главная</a></li>
-                            <li class="breadcrumb-item active">Категории</li>
+                            <li class="breadcrumb-item active">Тэги</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -26,17 +26,15 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h5>Редактирование категории</h5>
-                        <form action="{{route('admin.categories.update', $category->id)}}" method="post" class="w-25" enctype="multipart/form-data">
-                            @method('PATCH')
+                        <h5>Создание тэга</h5>
+                        <form action="{{route('admin.tags.store')}}" method="post" class="w-25" enctype="multipart/form-data">
                             {{csrf_field()}}
-
                             <div class="form-group">
-                                <label>Название категории</label>
-                                <input type="text" class="form-control" placeholder="Название категории" name="title" value="{{$category->title}}">
+                                <label>Название тэга</label>
+                                <input type="text" class="form-control" placeholder="Название тэга" name="title">
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Редактировать</button>
+                            <button type="submit" class="btn btn-primary">Создать</button>
                         </form>
                     </div>
                 </div>

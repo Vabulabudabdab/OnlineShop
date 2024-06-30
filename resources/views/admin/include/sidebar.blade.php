@@ -59,6 +59,15 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{route('admin.tags.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-home"></i>
+                    <p>
+                        Управление тэгаи
+                    </p>
+                </a>
+            </li>
+
         </ul>
     </div>
     <!-- /.sidebar -->
