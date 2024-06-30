@@ -73,12 +73,16 @@ Route::group(['middleware' => 'owner', 'auth', 'verify'],function () {
         Route::get('/', \App\Http\Controllers\Admin\Category\IndexController::class)->name('admin.categories.index');
         Route::get('/create', \App\Http\Controllers\Admin\Category\CreateController::class)->name('admin.categories.create');
         Route::get('/show/{category}', \App\Http\Controllers\Admin\Category\ShowController::class)->name('admin.categories.show');
+        Route::get('/edit/{category}', \App\Http\Controllers\Admin\Category\ShowController::class)->name('admin.categories.edit');
 
         /**
          * Post Routes
          */
         Route::post('/create/store', \App\Http\Controllers\Admin\Category\StoreController::class)->name('admin.categories.store.post');
+        Route::patch('/edit/store', \App\Http\Controllers\Admin\Category\UpdateController::class)->name('admin.categories.edit.post');
         Route::post('/delete/{category}', \App\Http\Controllers\Admin\Category\DeleteController::class)->name('admin.categories.delete');
     });
+
+
 
 });

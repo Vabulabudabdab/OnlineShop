@@ -1,5 +1,6 @@
 @extends('layouts.admin.layout')
 @section('content')
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -55,7 +56,6 @@
                         <div class="small-box bg-warning">
                             <div class="inner">
                                 <h3>{{$data['categories']}}</h3>
-
                                 <p>Категории</p>
                             </div>
                             <div class="icon">
@@ -84,7 +84,6 @@
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
-
     </div>
 
 @endsection

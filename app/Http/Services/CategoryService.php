@@ -21,7 +21,7 @@ class CategoryService {
             DB::beginTransaction();
 
             $category = Category::firstOrCreate([
-               'title' => $dto->title,
+               'title' => $title,
             ]);
 
             DB::commit();
@@ -32,6 +32,36 @@ class CategoryService {
 
     return $category;
     }
+
+    /**
+     * @param $data
+     * @param Category $category
+     * @return Category
+     */
+
+    public function update($data, Category $category) : Category {
+
+        $title = $data['title'];
+
+        try {
+            DB::beginTransaction();
+
+            $category->update([
+                'title' => $title
+            ]);
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            abort(500);
+            DB::rollBack();
+        }
+
+    }
+
+    /**
+     * @param Category $category
+     * @return void
+     */
 
     public function delete(Category $category) : void {
         $category->delete();
