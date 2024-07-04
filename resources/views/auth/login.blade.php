@@ -21,6 +21,8 @@
                 </div>
             </div>
         </section>
+
+
         <!--End Breadcrumb Style2-->
         <!--Start Login Page-->
         <section class="login-page pt-120 pb-120 wow fadeInUp animated">
@@ -59,7 +61,7 @@
                                     <div class="icon icon-2 "><i class="flaticon-visibility"></i> </div>
                                 </div>
                                 <div class="checkk ">
-                                    <div class="form-check p-0 m-0"> <input type="checkbox" id="remember" checked="{{!empty($_COOKIE['check']) == 'on' ? 'checked' : ''}}"  name="check"> <label
+                                    <div class="form-check p-0 m-0"> <input type="checkbox" id="remember" checked="{{!empty($_COOKIE['remember']) == 'on' ? 'checked' : ''}}"  name="remember"> <label
                                             class="p-0" for="remember"> Remember Me</label> </div> <a href="{{route('password.restore')}}"
                                                                                                       class="forgot"> Forgot Password?</a>
                                 </div>

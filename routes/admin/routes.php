@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'owner', 'auth', 'verify'],function () {
+Route::group([], function () {
 
     Route::get('/home', App\Http\Controllers\Admin\AdminIndexController::class)->name('admin.index.page');
 
@@ -101,6 +101,27 @@ Route::group(['middleware' => 'owner', 'auth', 'verify'],function () {
         Route::post('/create/store', \App\Http\Controllers\Admin\Tag\StoreController::class)->name('admin.tags.store');
         Route::patch('/edit/store/{tag}', \App\Http\Controllers\Admin\Tag\UpdateController::class)->name('admin.tags.update');
         Route::delete('/delete/{tag}', \App\Http\Controllers\Admin\Tag\DeleteController::class)->name('admin.tags.delete');
+    });
+
+    Route::group(['prefix' => 'product'], function () {
+
+        /**
+         * Get Routes
+         */
+
+        Route::get('/', \App\Http\Controllers\Admin\Product\IndexController::class)->name('admin.products.index');
+        Route::get('/create', \App\Http\Controllers\Admin\Product\CreateController::class)->name('admin.products.create');
+        Route::get('/show/{product}', \App\Http\Controllers\Admin\Product\ShowController::class)->name('admin.products.show');
+        Route::get('/edit/{product}', \App\Http\Controllers\Admin\Product\EditController::class)->name('admin.products.edit');
+
+        /**
+         * Patch/Post/Delete Routes
+         */
+
+        Route::post('/create/store', \App\Http\Controllers\Admin\Product\StoreController::class)->name('admin.products.store');
+        Route::post('/update/{product}', \App\Http\Controllers\Admin\Product\UpdateController::class)->name('admin.products.update');
+        Route::post('/delete/{product}', \App\Http\Controllers\Admin\Product\DeleteController::class)->name('admin.products.delete');
+
     });
 
 });

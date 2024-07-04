@@ -43,15 +43,30 @@ class AuthService {
         }
     }
 
-    public function login($data): bool {
+    public function login($request) {
 
-        if(isset($_POST['check'])) {
-            $this->setLoginCookie($data);
+        $email = $request->email;
+
+        $password = $request->password;
+
+        if($request->has('remember')) {
+            $remember = $request->remember;
+            $this->setLoginCookie($request);
         }
 
-        $status = Auth::attempt($data);
+        if(!empty($remember)) {
+            $status = Auth::attempt(["email" => $email, "password" => $password], $remember);
+        } else {
+            $status = Auth::attempt(["email" => $email, "password" => $password]);
+        }
 
-        return $status;
+        if($status !== false) {
+            $path = redirect()->route('home');
+        } else {
+            $path = redirect()->route('login.get')->with('error_login', 'Неверный логин или пароль');
+        }
+
+        return $path;
     }
 
     public function password_restore($data) : void {
@@ -71,7 +86,7 @@ class AuthService {
             ]);
 
             SendRestorePasswordToUserJob::dispatch($data, $password);
-//            Mail::to($email)->send(new Password($password));
+
             Session::put('reminder_pass', 'Не забудьте сменить пароль!');
             DB::commit();
         } catch (\Exception $exception) {
@@ -82,16 +97,16 @@ class AuthService {
 
 
 
-    public function setLoginCookie($data) {
+    public function setLoginCookie($request) {
 
         if(!empty($this->getLoginCookie())) {
-            unset($_COOKIE['email'], $_COOKIE['password'], $_COOKIE['check']);
+            unset($_COOKIE['email'], $_COOKIE['password'], $_COOKIE['remember']);
         }
 
         $response = [
-            setcookie('email', $data['email'], time()+86400),
-            setcookie('password', $data['password'], time()+86400),
-            setcookie('check', $_POST['check'], time()+86400),
+            setcookie('email', $request->email, time()+86400),
+            setcookie('password', $request->password, time()+86400),
+            setcookie('remember', $request->remember, time()+86400),
         ];
 
         return $response;
@@ -99,12 +114,11 @@ class AuthService {
 
     public function getLoginCookie() {
 
-        if(!empty($_COOKIE['email'])){
+        if(!empty($_COOKIE['remember'])){
             $response = [
-
                 $_COOKIE['email'],
                 $_COOKIE['password'],
-                $_COOKIE['check'],
+                $_COOKIE['remember']
             ];
         }  else {
             $response = null;

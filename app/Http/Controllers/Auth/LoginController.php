@@ -11,10 +11,8 @@ class LoginController extends BaseController {
 
         $data = $request->validated();
 
-        if($this->service->login($data)) {
-            return redirect()->route('home');
-        } else {
-            return redirect()->route('login.get')->with('error_login', 'Неверный логин или пароль');
-        }
+        $path = $this->service->login($request);
+
+        return $path;
     }
 }
