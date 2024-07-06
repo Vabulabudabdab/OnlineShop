@@ -12,7 +12,7 @@ class Product extends Model
     protected $table = 'products';
     protected $fillable = ['title', 'price', 'category', 'image'];
 
-    public function category() {
+    public function categories() {
         return $this->hasOne(Category::class, 'id', 'category');
     }
 

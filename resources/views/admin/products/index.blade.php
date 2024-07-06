@@ -47,6 +47,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Название продукта</th>
+                                        <th>Категория</th>
                                         <th>Цена</th>
                                         <th>Картинка</th>
                                         <th>Изменить</th>
@@ -59,6 +60,7 @@
                                         <tr>
                                             <td>{{$product->id}}</td>
                                             <td>{{$product->title}}</td>
+                                            <td>{{$product->categories->title}}</td>
                                             <td>{{$product->price}}</td>
                                             <td><img src="{{asset('storage/' . $product->image)}}" style="max-width: 100px; max-height: 50px;"/></td>
 

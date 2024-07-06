@@ -119,8 +119,18 @@ Route::group([], function () {
          */
 
         Route::post('/create/store', \App\Http\Controllers\Admin\Product\StoreController::class)->name('admin.products.store');
-        Route::post('/update/{product}', \App\Http\Controllers\Admin\Product\UpdateController::class)->name('admin.products.update');
-        Route::post('/delete/{product}', \App\Http\Controllers\Admin\Product\DeleteController::class)->name('admin.products.delete');
+        Route::patch('/update/{product}', \App\Http\Controllers\Admin\Product\UpdateController::class)->name('admin.products.update');
+        Route::delete('/delete/{product}', \App\Http\Controllers\Admin\Product\DeleteController::class)->name('admin.products.delete');
+
+    });
+
+    Route::group(['prefix' => 'orders'], function () {
+
+        /**
+         * Get Routes
+         */
+
+        Route::get('/', \App\Http\Controllers\Admin\Order\IndexController::class)->name('admin.orders.index');
 
     });
 

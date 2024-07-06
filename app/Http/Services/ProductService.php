@@ -16,7 +16,7 @@ class ProductService {
      * @param CreateProductDTO $DTO
      * @return void
      */
-    public function store(CreateProductDTO $DTO) {
+    public function store(CreateProductDTO $DTO) : void {
 
         $tagIds = $DTO->tag_ids;
 
@@ -46,7 +46,7 @@ class ProductService {
      * @param UpdateProductDTO $DTO
      * @return void
      */
-    public function update(Product $product, UpdateProductDTO $DTO) {
+    public function update(Product $product, UpdateProductDTO $DTO) : void {
 
         $tagIds = $DTO->tag_ids;
 
