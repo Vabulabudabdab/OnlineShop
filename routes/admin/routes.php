@@ -134,4 +134,20 @@ Route::group([], function () {
 
     });
 
+    Route::group(['prefix' => 'payment'], function () {
+
+        /**
+         * Get Routes
+         */
+
+        Route::get('/', \App\Http\Controllers\Admin\Payment\PaymentController::class)->name('admin.payment.index');
+
+        /**
+         * Patch/Post/Delete Routes
+         */
+
+        Route::post('/store', \App\Http\Controllers\Admin\Payment\StoreController::class)->name('admin.payment.store');
+
+    });
+
 });

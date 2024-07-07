@@ -203,6 +203,11 @@
                                     <p class="d-flex align-items-center"> <span class="icon"> <i
                                                 class="flaticon-power"></i> </span> Welcome to Karte Online Shop</p>
                                     <div class="right d-flex align-items-center ">
+
+                                        @if(auth()->user())
+                                            Ваш баланс: {{auth()->user()->balance}}
+                                        @endif
+
                                         <div class="language currency"> <select>
                                                 <option>USD</option>
                                                 <option value="1">RUB</option>

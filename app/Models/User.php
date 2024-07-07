@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable, SoftDeletes;
 
     protected $table = 'users';
-    protected $fillable = ['name', 'email', 'password', 'image', 'role_id', 'remember_token', 'banned_at'];
+    protected $fillable = ['name', 'email', 'password', 'image', 'role_id', 'remember_token', 'banned_at', 'balance'];
 
     protected $dates = [
         'banned_at'
