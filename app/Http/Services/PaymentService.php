@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentService {
 
-    public function account_store($data) {
+    /**
+     * @param $data
+     * @return void
+     */
+
+    public function account_store($data) : void {
 
         $user = Auth::user();
         $current_user_balance = Auth::user()->balance;
