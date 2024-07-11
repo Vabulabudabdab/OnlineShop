@@ -209,13 +209,14 @@
                         <div class="tab-pane fade show active" id="pills-best-sellers" role="tabpanel"
                              aria-labelledby="pills-best-sellers-tab">
                             <div class="catagory-slider-three">
+                                @foreach($products as $product)
                                 <div class="products-three__inner">
                                     <div class="products-three-single w-100">
                                         <div class="products-three-single-img">
                                             <a href="shop-details-3.html" class="d-block">
-                                                <img src="assets/images/home-three/products-1.jpg" class="first-img"
+                                                <img src="{{asset('storage/' . $product->image)}}" class="first-img"
                                                      alt="" />
-                                                <img src="assets/images/home-three/products-hover-1.png" alt=""
+                                                <img src="{{asset('storage/' . $product->image)}}" alt=""
                                                      class="hover-img" />
                                             </a>
                                             <div class="products-grid-one__badge-box"> <span
@@ -235,153 +236,13 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                            <h5><a href="shop-details-3.html">Apex Sneakers </a></h5>
-                                            <p>$159.00</p>
+                                        <div class="products-three-single-content text-center"> <span>{{$product->categories->title}}</span>
+                                            <h5><a href="shop-details-3.html">{{$product->title}} </a></h5>
+                                            <p>${{$product->price}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="products-three__inner">
-                                    <div class="products-three-single w-100">
-                                        <div class="products-three-single-img">
-                                            <a href="shop-details-3.html" class="d-block">
-                                                <img src="assets/images/home-three/products-2.jpg" alt="" />
-                                            </a>
-                                            <a href="cart.html" class="addcart btn--primary style2">
-                                                Add To Cart </a>
-                                            <div class="products-grid__usefull-links">
-                                                <ul>
-                                                    <li><a href="wishlist.html"> <i class="flaticon-heart"> </i> <span>
-                                                                wishlist</span> </a> </li>
-                                                    <li><a href="#0"> <i class="flaticon-left-and-right-arrows"></i>
-                                                            <span>
-                                                                compare</span> </a> </li>
-                                                    <li><a href="shop-details-3.html"> <i
-                                                                class="flaticon-visibility"></i> <span> quick
-                                                                view</span> </a> </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                            <h5><a href="shop-details-3.html">Sports Shoes</a></h5>
-                                            <p>$159.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="products-three__inner">
-                                    <div class="products-three-single w-100">
-                                        <div class="products-three-single-img">
-                                            <a href="shop-details-3.html" class="d-block">
-                                                <img src="assets/images/home-three/products-3.jpg" class="first-img"
-                                                     alt="" />
-                                                <img src="assets/images/home-three/products-hover-3.png" alt=""
-                                                     class="hover-img" />
-                                            </a>
-                                            <div class="products-grid-one__badge-box"> <span
-                                                    class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                                                                                    class="addcart btn--primary style2"> Add To Cart </a>
-                                            <div class="products-grid__usefull-links">
-                                                <ul>
-                                                    <li><a href="#0"> <i class="flaticon-heart"> </i> <span>
-                                                                wishlist</span>
-                                                        </a> </li>
-                                                    <li><a href="#0"> <i class="flaticon-left-and-right-arrows"></i>
-                                                            <span>
-                                                                compare</span> </a> </li>
-                                                    <li><a href="shop-details-3.html"> <i
-                                                                class="flaticon-visibility"></i> <span> quick
-                                                                view</span> </a> </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                            <h5><a href="shop-details-3.html">Trendy stylish shoes</a></h5>
-                                            <p>$159.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="products-three__inner">
-                                    <div class="products-three-single w-100">
-                                        <div class="products-three-single-img">
-                                            <a href="shop-details-3.html" class="d-block">
-                                                <img src="assets/images/home-three/products-4.jpg" alt="" />
-                                            </a>
-                                            <a href="cart.html" class="addcart btn--primary style2"> Add To Cart </a>
-                                            <div class="products-grid__usefull-links">
-                                                <ul>
-                                                    <li><a href="wishlist.html"> <i class="flaticon-heart"> </i> <span>
-                                                                wishlist</span> </a> </li>
-                                                    <li><a href="compare.html"> <i
-                                                                class="flaticon-left-and-right-arrows"></i> <span>
-                                                                compare</span> </a> </li>
-                                                    <li><a href="shop-details-3.html"> <i
-                                                                class="flaticon-visibility"></i> <span> quick
-                                                                view</span> </a> </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                            <h5><a href="shop-details-3.html">Casual Shoes</a></h5>
-                                            <p>$159.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="products-three__inner">
-                                    <div class="products-three-single w-100">
-                                        <div class="products-three-single-img img-bg">
-                                            <a href="shop-details-3.html" class="d-block">
-                                                <img src="assets/images/home-three/products-5.png" alt="" />
-                                            </a>
-                                            <div class="products-grid-one__badge-box"> <span
-                                                    class="bg_black badge discount">-10%</span> </div> <a
-                                                href="cart.html" class="addcart btn--primary style2"> Add To Cart </a>
-                                            <div class="products-grid__usefull-links">
-                                                <ul>
-                                                    <li><a href="wishlist.html"> <i class="flaticon-heart"> </i> <span>
-                                                                wishlist</span> </a> </li>
-                                                    <li><a href="compare.html"> <i
-                                                                class="flaticon-left-and-right-arrows"></i> <span>
-                                                                compare</span> </a> </li>
-                                                    <li><a href="shop-details-3.html"> <i
-                                                                class="flaticon-visibility"></i> <span> quick
-                                                                view</span> </a> </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                            <h5><a href="shop-details-3.html">High Quality Sneakers </a></h5>
-                                            <p>$159.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="products-three__inner">
-                                    <div class="products-three-single w-100">
-                                        <div class="products-three-single-img">
-                                            <a href="shop-details-3.html" class="d-block">
-                                                <img src="assets/images/home-three/products-6.png" alt="" />
-                                            </a>
-                                            <div class="products-grid-one__badge-box"> <span
-                                                    class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                                                                                    class="addcart btn--primary style2"> Add To Cart </a>
-                                            <div class="products-grid__usefull-links">
-                                                <ul>
-                                                    <li><a href="wishlist.html"> <i class="flaticon-heart"> </i> <span>
-                                                                wishlist</span> </a> </li>
-                                                    <li><a href="compare.html"> <i
-                                                                class="flaticon-left-and-right-arrows"></i> <span>
-                                                                compare</span> </a> </li>
-                                                    <li><a href="shop-details-3.html"> <i
-                                                                class="flaticon-visibility"></i> <span> quick
-                                                                view</span> </a> </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                            <h5><a href="shop-details-3.html">Outdoor Sports Shoes</a></h5>
-                                            <p><del>$200.00</del> $159.00</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-new-arrivals" role="tabpanel"

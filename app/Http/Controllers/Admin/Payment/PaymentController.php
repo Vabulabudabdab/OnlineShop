@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Payment;
 
+use App\Models\User;
+
 class PaymentController {
 
     public function __invoke() {
-        return view('admin.payment.index');
+        $users = User::all();
+
+        return view('admin.payment.index', compact('users'));
     }
 
 }

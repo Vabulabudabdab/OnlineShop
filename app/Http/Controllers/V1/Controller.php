@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Services\AuthService;
+use App\Models\Product;
 use App\Models\User;
 
 
 class Controller {
 
     public function home() {
-        return view('home.home');
+        $products = Product::all();
+        return view('home.home', compact('products'));
     }
 
     public function register() {
