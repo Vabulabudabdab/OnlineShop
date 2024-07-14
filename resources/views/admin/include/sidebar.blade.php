@@ -95,6 +95,15 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{route('admin.posts.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-home"></i>
+                    <p>
+                        Посты
+                    </p>
+                </a>
+            </li>
+
         </ul>
     </div>
     <!-- /.sidebar -->
