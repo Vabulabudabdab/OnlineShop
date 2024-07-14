@@ -57,12 +57,11 @@
                                             <td>{{$post->id}}</td>
                                             <td>{{$post->title}}</td>
 
-                                            <td class="text-center"><a
-                                                    href="{{route('admin.posts.show', $post->id)}}"><i
+                                            <td class="text-center"><a href="{{route('admin.posts.show', $post->id)}}"><i
                                                         class="far fa-eye"></i></a></td>
+
                                             <td class="text-center"><a href="{{route('admin.posts.edit', $post->id)}}"
-                                                                       class="text-success"><i
-                                                        class="fas fa-pencil-alt"></i></a></td>
+                                                                       class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
 
                                             <td class="text-center">
                                                 <form action="{{route('admin.posts.delete', $post->id)}}" method="POST">

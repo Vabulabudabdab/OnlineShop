@@ -159,9 +159,9 @@ Route::group([], function () {
 
         Route::get('/create', [\App\Http\Controllers\Admin\Post\IndexController::class, 'create'])->name('admin.posts.create');
 
-        Route::get('/show/{post}', [\App\Http\Controllers\Admin\Post\IndexController::class, 'show'])->name('admin.posts.edit');
+        Route::get('/show/{post}', [\App\Http\Controllers\Admin\Post\IndexController::class, 'show'])->name('admin.posts.show');
 
-        Route::get('/edit/{post}', [\App\Http\Controllers\Admin\Post\IndexController::class, 'edit'])->name('admin.posts.show');
+        Route::get('/edit/{post}', [\App\Http\Controllers\Admin\Post\IndexController::class, 'edit'])->name('admin.posts.edit');
 
 
         /**
@@ -169,7 +169,7 @@ Route::group([], function () {
          */
 
         Route::post('/create/store', [\App\Http\Controllers\Admin\Post\IndexController::class, 'store'])->name('admin.posts.store');
-        Route::post('/edit/store', [\App\Http\Controllers\Admin\Post\IndexController::class, 'update'])->name('admin.posts.edit');
+        Route::post('/edit/store', [\App\Http\Controllers\Admin\Post\IndexController::class, 'update'])->name('admin.posts.update');
         Route::delete('/delete/{post}', [\App\Http\Controllers\Admin\Post\IndexController::class, 'delete'])->name('admin.posts.delete');
 
     });
