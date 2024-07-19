@@ -32,7 +32,7 @@
                                 {{csrf_field()}}
                                 <label>Название</label>
                                 <input type="text" class="form-control" placeholder="Название поста" name="title"
-                                       value="{{$post->title}}">
+                                       value="{{$post ? $post->title : old('title')}}">
                                 @error('title')
                                 <div class="text-danger">{{$message}}</div>
                             @enderror
@@ -43,29 +43,26 @@
                             <select class="form-control" name="category_id">
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}"
-                                        {{$category->id == $post->category_id ? ' selected' : ''}}>{{$category->title}}</option>
+                                        {{$category->id == old('category_id') ? ' selected' : ''}}>{{$category->title}}</option>
                                 @endforeach
 
                             </select>
                             @error('category_id')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
-                        </div>
 
+                        </div>
                         <div class="form-group">
                             <label>Тэги</label>
                             <select class="select2" name="tag_ids[]" multiple="multiple" data-placeholder="Выберите тэги" style="width: 100%;">
                                 @foreach($tags as $tag)
-                                    <option {{is_array($post->tags->pluck('id')->toArray()) && in_array($tag->id, $post->tags->pluck('id')->toArray()  ) ? 'selected' : $tag->title}} value="{{$tag->id}}">{{$tag->title}}</option>
+                                    <option @foreach($relatedTags as $rt) {{$rt == $tag->id ? 'selected' : '' }}  @endforeach   value="{{$tag->id}}">{{$tag->title}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group w-25">
                             <label for="exampleInputFile">Обновить главную картинку</label>
-                            <div class="w-25">
-                                <img src="{{asset('storage/'.$post->main_image)}}" alt="main_image" class="w-100">
-                            </div>
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="main_image">
@@ -81,9 +78,6 @@
                         </div>
                         <div class="form-group w-25">
                             <label for="exampleInputFile">Обновить превью</label>
-                            <div class="w-25">
-                                <img src="{{asset('storage/'.$post->preview_image)}}" alt="main_image" class="w-100">
-                            </div>
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="preview_image">
@@ -94,14 +88,16 @@
                                 </div>
                             </div>
                             @error('preview_image')
-                            <div class="text-danger">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <textarea id="summernote" name="content">{{$post->content}}</textarea>
-                            @error('content')
                             <div class="text-danger">Это поле не может быть пустым</div>
                             @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Обновить описание</label>
+                            <textarea id="summernote2" name="description">{{$post ? $post->description : old('description')}}</textarea>
+
+                            <label for="exampleInputFile">Обновить контент</label>
+                            <textarea id="summernote" name="content">{{$post ? $post->content : old('content')}}</textarea>
                         </div>
 
                         <div class="form-group">

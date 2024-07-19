@@ -169,7 +169,7 @@ Route::group([], function () {
          */
 
         Route::post('/create/store', [\App\Http\Controllers\Admin\Post\IndexController::class, 'store'])->name('admin.posts.store');
-        Route::post('/edit/store', [\App\Http\Controllers\Admin\Post\IndexController::class, 'update'])->name('admin.posts.update');
+        Route::post('/edit/store/{post}', [\App\Http\Controllers\Admin\Post\IndexController::class, 'update'])->name('admin.posts.update');
         Route::delete('/delete/{post}', [\App\Http\Controllers\Admin\Post\IndexController::class, 'delete'])->name('admin.posts.delete');
 
     });

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\Post;
 
 use App\DataTransferObject\CreatePostDTO;
+use App\DataTransferObject\UpdatePostDTO;
 use App\Http\Requests\Posts\StoreRequest;
+use App\Http\Requests\Posts\UpdateRequest;
 use App\Models\Post;
 
 class IndexController extends BaseController {
@@ -46,8 +48,28 @@ class IndexController extends BaseController {
         return $path;
     }
 
-    public function update(Post $post) {
-        $this->service->update($post);
+    /**
+     * same with store
+     * @param UpdateRequest $request
+     * @param Post $post
+     * @return mixed
+     */
+
+    public function update(UpdateRequest $request, Post $post) {
+        $data = $request->validated();
+
+        $preview_image = $this->service->getPreviewImage($data['preview_image']);
+        $main_image = $this->service->getMainImage($data['main_image']);
+
+        $path = $this->service->update(new UpdatePostDTO(
+            $data['title'],
+            $data['description'],
+            $data['category_id'],
+            $data['tag_ids'],
+            $main_image,
+            $preview_image,
+            $data['content']), $post);
+
         return $path;
     }
 

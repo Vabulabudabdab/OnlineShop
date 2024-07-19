@@ -3,8 +3,10 @@
 namespace App\Http\Services;
 
 use App\DataTransferObject\CreatePostDTO;
+use App\DataTransferObject\UpdatePostDTO;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Post_Tag;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -45,8 +47,9 @@ class PostService {
     public function edit(Post $post) {
         $categories = Category::all();
         $tags = Tag::all();
+        $relatedTags = $post->tags()->pluck('tag_id')->toArray();
 
-        $path = view('admin.posts.edit', compact('categories', 'tags'));
+        $path = view('admin.posts.edit', compact('categories', 'tags', 'post', 'relatedTags'));
 
         return $path;
     }
@@ -91,6 +94,36 @@ class PostService {
             abort(500);
             DB::rollBack();
         }
+        return $path;
+    }
+
+    public function update(UpdatePostDTO $DTO, Post $post) {
+
+        $tag_ids = $DTO->tag_ids;
+
+        try {
+            DB::beginTransaction();
+
+            $post->update([
+                'title' => $DTO->title,
+                'category_id' => $DTO->category_id,
+                'description' => $DTO->description,
+                'content' => $DTO->content,
+                'preview_image' => $DTO->preview_image,
+                'main_image' => $DTO->main_image
+            ]);
+
+            $post->tags()->sync($tag_ids);
+
+            $path = redirect()->route('admin.posts.index');
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            dd($exception);
+            abort(500);
+            DB::rollBack();
+        }
+
         return $path;
     }
 
