@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\DataTransferObject\CreatePostDTO;
+use App\DataTransferObject\InfoAboutPostsDTO;
 use App\DataTransferObject\UpdatePostDTO;
 use App\Models\Category;
 use App\Models\Post;
@@ -15,16 +16,13 @@ use Illuminate\Support\Facades\Storage;
 class PostService {
 
     /**
-     * Test dev pattern
-     */
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * @return InfoAboutPostsDTO
      */
     public function index() {
+
         $posts = Post::paginate(9);
 
         $path = view('admin.posts.index', compact('posts'));
-
         return $path;
     }
 
@@ -96,6 +94,12 @@ class PostService {
         }
         return $path;
     }
+
+    /**
+     * @param UpdatePostDTO $DTO
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     */
 
     public function update(UpdatePostDTO $DTO, Post $post) {
 

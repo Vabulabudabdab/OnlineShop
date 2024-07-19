@@ -86,6 +86,12 @@
                                         <td><img src="{{asset('storage/'. $post->main_image)}}" style="width: 175px; height: 215px;"/> </td>
                                     </tr>
 
+                                    <tr>
+                                        <td>Комментарии к посту</td>
+                                        @foreach($post->comments as $comment)
+                                            <td>{{$comment->id}}</td>
+                                        @endforeach
+                                    </tr>
 
 
                                     </tbody>
