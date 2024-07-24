@@ -42,7 +42,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{$data['posts']}}</h3>
 
                                 <p>Посты</p>
                             </div>

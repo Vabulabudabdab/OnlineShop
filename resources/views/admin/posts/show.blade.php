@@ -86,16 +86,31 @@
                                         <td><img src="{{asset('storage/'. $post->main_image)}}" style="width: 175px; height: 215px;"/> </td>
                                     </tr>
 
-                                    <tr>
-                                        <td>Комментарии к посту</td>
-                                        @foreach($post->comments as $comment)
-                                            <td>{{$comment->id}}</td>
-                                        @endforeach
-                                    </tr>
-
-
                                     </tbody>
                                 </table>
+                                Комментарии к посту
+                                @foreach($post->comments as $comment)
+                                    <div class="form-group">
+                                        <div class="comment">
+                                            {{$comment->id}}
+                                            <br>
+                                            {{$comment->users->name}}
+                                            <br>
+                                            {{$comment->message}}
+                                            <span class="right" style="float:right;">{{$comment->created_at->diffForHumans()}}</span>
+                                            @foreach($comment->subComments as $subComment)
+                                                <div class="comment">
+                                                    Кому:{{$subComment->comment_id}}
+                                                    <br>
+                                                    От кого:{{$subComment->users->name}}
+                                                    <br>
+                                                    {{$subComment->message}}
+                                                    <span class="right" style="float:right;">{{$subComment->created_at->diffForHumans()}}</span>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                             <!-- /.card-body -->
                         </div>
