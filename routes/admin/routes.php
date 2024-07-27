@@ -131,6 +131,15 @@ Route::group([], function () {
          */
 
         Route::get('/', \App\Http\Controllers\Admin\Order\IndexController::class)->name('admin.orders.index');
+        Route::get('/create', \App\Http\Controllers\Admin\Order\CreateController::class)->name('admin.orders.create');
+        Route::get('/show/{order}', \App\Http\Controllers\Admin\Order\ShowController::class)->name('admin.orders.show');
+
+        /**
+         * Post Routes
+         */
+
+        Route::post('/create/store/{product}', \App\Http\Controllers\Admin\Order\StoreController::class)->name('admin.orders.store');
+        Route::post('/pay/{order}', \App\Http\Controllers\Admin\Order\PayController::class)->name('admin.orders.payment');
 
     });
 

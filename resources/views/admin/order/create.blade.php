@@ -1,6 +1,7 @@
 @extends('layouts.admin.layout')
 
 @section('content')
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -24,25 +25,12 @@
         <section class="content">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
-                <div class="row">
-
-                    <div class="col-md-1 mb-3">
-                        @if(Route::has('admin.orders.create'))
-                        <a href="{{route('admin.orders.create')}}" class="btn btn-block btn-primary">Добавить</a>
-                        @else
-                            <a href="" class="btn btn-block btn-primary" style="opacity: 0.5; cursor: default;">Добавить</a>
-                        @endif
-                    </div>
-                    <div class="col-md-1 mb-3">
-                        <a href="#" class="btn btn-block btn-primary w-100" style="opacity: 0.5; cursor: default;">Восстановить</a>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="col-10">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Текущие Заказы</h3>
+                                <h3 class="card-title">Заказать продукт</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
@@ -50,37 +38,37 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Кто заказал</th>
                                         <th>Название продукта</th>
                                         <th>Категория</th>
                                         <th>Цена</th>
-                                        <th>Статус заказа</th>
                                         <th>Картинка</th>
+                                        <th>Заказать</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($orders as $order)
+                                    @foreach($products as $product)
+                                        @if($product->price < Auth::user()->balance) @endif
                                         <tr>
-                                            <td>{{$order->id}}</td>
-                                            <td>{{$order->users->email}}</td>
-                                            <td>{{$order->products->title}}</td>
-                                            <td>{{$order->products->categories->title}}</td>
-                                            <td>{{$order->products->price}}</td>
-
-                                            <td style="color:{{'#'.$order->payments->color}};">{{$order->payments->title}}</td>
-
-                                            <td><img src="{{asset('storage/' . $order->products->image)}}" style="max-width: 100px; max-height: 50px;"/></td>
-
-
-                                            <td class="text-center"><a
-                                                    href="{{route('admin.orders.show', $order->id)}}"><i
-                                                        class="far fa-eye"></i></a></td>
+                                            <td>{{$product->id}}</td>
+                                            <td>{{$product->title}}</td>
+                                            <td>{{$product->categories->title}}</td>
+                                            <td>{{$product->price}}</td>
+                                            <td><img src="{{asset('storage/' . $product->image)}}" style="max-width: 100px; max-height: 50px;"/></td>
+                                            <td>
+                                                <form action="{{route('admin.orders.store', $product->id)}}" method="POST">
+                                                  {{csrf_field()}}
+                                                  <button type="submit" class="border-0 bg-transparent">
+                                                 <i class="fas fa-check text-danger" role="button"></i>
+                                                </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
 
-                                {{ $orders->links()}}
+                                {{ $products->links()}}
 
                             </div>
                             <!-- /.card-body -->
@@ -93,4 +81,5 @@
         </section>
         <!-- /.content -->
     </div>
+
 @endsection

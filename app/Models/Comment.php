@@ -24,4 +24,6 @@ class Comment extends Model
         return $this->hasMany(SubComment::class, 'comment_id', 'id');
     }
 
+
+
 }

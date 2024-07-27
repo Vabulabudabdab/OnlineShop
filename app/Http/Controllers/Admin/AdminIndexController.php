@@ -16,6 +16,7 @@ class AdminIndexController {
         $data['categories'] = Category::all()->count();
         $data['tags'] = Tag::all()->count();
         $data['posts'] = Post::all()->count();
+
         return view('admin.index', compact('data'));
     }
 
