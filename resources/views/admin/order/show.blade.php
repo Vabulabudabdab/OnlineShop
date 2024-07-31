@@ -68,16 +68,20 @@
                                         <td style="color:{{'#' . $order->current_status->color}}">{{$order->current_status->title}}</td>
                                     </tr>
                                     @if($order->status == 2)
-                                    <td>
-                                        <form action="{{route('admin.orders.payment', $order->id)}}" method="post">
-                                            {{csrf_field()}}
-                                            <button class="btn-primary" type="submit">Оплатить</button>
-                                        </form>
-                                    </td>
+
+                                    <tr>
+                                        <td>
+                                            <form action="{{route('admin.orders.payment', $order->id)}}" method="post">
+                                                {{csrf_field()}}
+                                                <button class="btn-primary" type="submit">{{$order->products->price}}</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     @endif
                                     </tbody>
                                 </table>
                             </div>
+                            {!! QrCode::generate(URL::current()); !!}
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->

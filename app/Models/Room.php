@@ -12,6 +12,7 @@ class Room extends Model
 
     protected $table = 'rooms';
     protected $fillable = ['owner_room', 'status', 'name', 'description', 'url'];
+
     const CLOSE = 0;
     const OPEN = 1;
 
