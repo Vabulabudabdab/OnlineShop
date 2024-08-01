@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\V1;
 
-use App\Http\Services\AuthService;
 use App\Models\Product;
 use App\Models\User;
 

@@ -207,11 +207,14 @@
                                         @if(auth()->user())
                                             Ваш баланс: {{auth()->user()->balance}}
                                         @endif
-
+                                        <form id="changeCurrency" action="{{route('home.change.currency')}}" method="post">
+                                            {{csrf_field()}}
                                         <div class="language currency"> <select>
-                                                <option>USD</option>
-                                                <option value="1">RUB</option>
+                                               <option value="0" name="USD">USD</option>
+                                               <option value="1" name="RUB">RUB</option>
                                             </select> </div>
+                                            <button type="submit" class="btn-primary">Submit</button>
+                                        </form>
                                         <div class="language two"> <select>
                                                 <option>EN</option>
                                                 <option value="1">RU</option>
@@ -977,6 +980,13 @@
 <script src="{{asset('assets/js/plugin/jquery.countdown.min.js')}}"></script> <!-- Main js -->
 <script src="{{asset('assets/js/main.js')}}"></script>
 <!--==== Js Scripts End ====-->
+<script>
+    function submit() {
+        let form = document.getElementById("changeCurrency");
+        form.submit();
+        alert("Data stored in database!");
+    }
+</script>
 </body>
 
 </html>

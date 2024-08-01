@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Http\Requests\CurrencyRequest;
 use App\Http\Requests\User\SetImageRequest;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends BaseController {
 
@@ -14,6 +14,13 @@ class UserController extends BaseController {
     $this->service->UserSetImage($data);
 
     return redirect()->back();
+    }
+
+    public function changeCurrency(CurrencyRequest $request) {
+        dd($_POST['USD']);
+        $data = $request->validated();
+        dd($data);
+
     }
 
 }
