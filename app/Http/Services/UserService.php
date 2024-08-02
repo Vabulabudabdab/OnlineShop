@@ -231,4 +231,44 @@ class UserService {
         }
     }
 
+    public function changeCurrency($data, User $user) {
+
+        $current_currency = $data['currency'];
+
+        try {
+            DB::beginTransaction();
+
+            $user->update([
+                'currency_id' => $current_currency
+            ]);
+
+            DB::commit();
+        } catch (Exception $exception) {
+            dd($exception);
+            abort(500);
+            DB::rollBack();
+        }
+
+    }
+
+    public function changeLanguage($data, User $user) {
+
+        $current_language = $data['language'];
+
+        try {
+            DB::beginTransaction();
+
+            $user->update([
+                'lang' => $current_language
+            ]);
+
+            DB::commit();
+        } catch (Exception $exception) {
+            dd($exception);
+            abort(500);
+            DB::rollBack();
+        }
+
+    }
+
 }

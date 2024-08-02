@@ -207,18 +207,25 @@
                                         @if(auth()->user())
                                             Ваш баланс: {{auth()->user()->balance}}
                                         @endif
-                                        <form id="changeCurrency" action="{{route('home.change.currency')}}" method="post">
+
+                                        <form id="changeCurrency" action="{{route('home.change.currency', Auth::user()->id)}}" method="post">
                                             {{csrf_field()}}
-                                        <div class="language currency"> <select>
-                                               <option value="0" name="USD">USD</option>
-                                               <option value="1" name="RUB">RUB</option>
-                                            </select> </div>
-                                            <button type="submit" class="btn-primary">Submit</button>
+
+                                            <div class="language currency"> <select name="currency" onchange="document.getElementById('changeCurrency').submit()">
+                                               @foreach($currencies as $currency)
+                                                    <option value="{{$currency->id}}">{{$currency->title}}</option>
+                                                   @endforeach
+                                            </select></div>
                                         </form>
-                                        <div class="language two"> <select>
-                                                <option>EN</option>
-                                                <option value="1">RU</option>
+
+                                            <form id="changeLanguage" action="{{route('home.change.lang', Auth::user()->id)}}" method="post">
+                                                {{csrf_field()}}
+                                        <div class="language two"> <select name="language" onchange="document.getElementById('changeLanguage').submit()">
+                                                @foreach($languages as $language)
+                                                    <option value="{{$language->id}}">{{$language->title}}</option>
+                                                @endforeach
                                             </select> </div>
+                                            </form>
                                         @if(!auth()->user())
                                             <a href="{{route('register.get')}}"> Register </a>
                                             /

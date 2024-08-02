@@ -11,7 +11,8 @@ Route::group(['prefix' => 'home'],  function () {
 
     Route::get('/', [App\Http\Controllers\V1\Controller::class, 'home'])->name('home');
 
-    Route::post('/lang', [App\Http\Controllers\V1\UserController::class, 'changeCurrency'])->name('home.change.currency');
+    Route::post('/currency/{user}', [App\Http\Controllers\V1\UserController::class, 'changeCurrency'])->name('home.change.currency');
+    Route::post('/lang/{user}', [App\Http\Controllers\V1\UserController::class, 'changeLang'])->name('home.change.lang');
 
     Route::group(['prefix' => 'profile'], function () {
        Route::get('/{name}', [\App\Http\Controllers\V1\Controller::class, 'profile'])->name('profile')->middleware('auth');
