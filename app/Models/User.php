@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -45,7 +46,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function role_id() {
-        return $this->hasOne(Role::class, 'role_id', 'id');
+        return $this->hasOne(Role::class, 'id', 'role_id');
+    }
+
+    public function currency() {
+        return $this->hasOne(Currency::class, 'id', 'currency_id');
     }
 
     public function ban(User $user, $ban_date) {

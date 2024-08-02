@@ -205,9 +205,10 @@
                                     <div class="right d-flex align-items-center ">
 
                                         @if(auth()->user())
-                                            Ваш баланс: {{auth()->user()->balance}}
+                                            Ваш баланс: {{strpos(auth()->user()->balance / auth()->user()->currency->value, '.') ? Str::cutToFirstPoint(auth()->user()->balance / auth()->user()->currency->value) : auth()->user()->balance / auth()->user()->currency->value }}
+                                            {{auth()->user()->currency->title}}
                                         @endif
-
+                                        @if(auth()->user())
                                         <form id="changeCurrency" action="{{route('home.change.currency', Auth::user()->id)}}" method="post">
                                             {{csrf_field()}}
 
@@ -218,6 +219,7 @@
                                             </select></div>
                                         </form>
 
+
                                             <form id="changeLanguage" action="{{route('home.change.lang', Auth::user()->id)}}" method="post">
                                                 {{csrf_field()}}
                                         <div class="language two"> <select name="language" onchange="document.getElementById('changeLanguage').submit()">
@@ -226,6 +228,7 @@
                                                 @endforeach
                                             </select> </div>
                                             </form>
+                                            @endif
                                         @if(!auth()->user())
                                             <a href="{{route('register.get')}}"> Register </a>
                                             /
