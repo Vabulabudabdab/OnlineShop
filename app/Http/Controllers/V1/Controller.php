@@ -30,11 +30,12 @@ class Controller {
     }
 
     public function profile(User $user) {
-
+        $currencies = Currency::all();
+        $languages = Language::all();
         $username = request()->route()->parameter('name');
         $user = User::all()->where('name', $username)->first();
 
-        return view('user.profile', compact('user'));
+        return view('user.profile', compact('user','currencies', 'languages'));
     }
 
 }

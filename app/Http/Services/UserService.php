@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\DataTransferObject\CreateUserDTO;
 use App\DataTransferObject\UpdateUserDTO;
+use App\Http\Controllers\Admin\Users\UserInterface;
 use App\Jobs\SendPasswordToUserJob;
 use App\Models\User;
 use Carbon\Carbon;
@@ -13,20 +14,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use PHPUnit\Exception;
 
-class UserService {
+class UserService implements UserInterface {
 
     /**
      * getUser method
      * @param $id
      * @return user
      */
-    public function getUser($id) {
-        $result = DB::table('users')->select('*')->where('id', $id)->first();
-        return $result;
-    }
+   public function getUser(int $id)
+   {
+       $result = User::where('id', $id)->first();
+       return $result;
+   }
 
     /**
      * Create User Function
@@ -97,7 +98,7 @@ class UserService {
         $currentImage = $data['image'];
         $id = auth()->user()->id;
 
-        $oldImage = DB::table('users')->select('image')->where('id', $id)->get()->first();
+        $oldImage = User::where('id', $id)->first();
 
         $currentImage = Storage::disk('public')->put('/images', $currentImage);
 

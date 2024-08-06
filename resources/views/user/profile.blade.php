@@ -107,8 +107,24 @@
                                  aria-labelledby="v-pills-address-tab">
 
                             </div>
+
                             <div class="tab-pane fade" id="v-pills-account" role="tabpanel"
                                  aria-labelledby="v-pills-account-tab">
+
+                                @if(!empty('success_qr'))
+                                    {{session('success_qr')}}
+                                @endif
+
+                                @if(!empty($_COOKIE['profile-qr']) && $_COOKIE['profile-qr'] == auth()->user()->name)
+                                    {!! QrCode::size(500)->generate(URL::current()); !!}
+                                @else
+                                    <form action="{{route('home.qr.gen')}}" method="post">
+                                        @csrf
+
+                                        <button class="btn--primary" type="submit">Сгенерировать QR</button>
+                                    </form>
+                                @endif
+
 
                             </div>
 

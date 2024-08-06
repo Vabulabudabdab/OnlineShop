@@ -14,9 +14,10 @@ Route::group(['prefix' => 'home'],  function () {
     Route::post('/currency/{user}', [App\Http\Controllers\V1\UserController::class, 'changeCurrency'])->name('home.change.currency');
     Route::post('/lang/{user}', [App\Http\Controllers\V1\UserController::class, 'changeLang'])->name('home.change.lang');
 
+
     Route::group(['prefix' => 'profile'], function () {
        Route::get('/{name}', [\App\Http\Controllers\V1\Controller::class, 'profile'])->name('profile')->middleware('auth');
-
+       Route::post('/qr', [\App\Http\Controllers\V1\UserController::class, 'generateQr'])->name('home.qr.gen');
        Route::post('/{id}/setImage', [\App\Http\Controllers\V1\UserController::class, 'setImage'])->name('profile.set-image');
 
     });

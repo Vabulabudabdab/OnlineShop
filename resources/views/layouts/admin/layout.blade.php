@@ -41,6 +41,11 @@
                 </li>
             </ul>
             <!-- Left navbar links -->
+            <ul class="navbar-nav" STYLE="float: left;">
+                <li class="nav-item">
+                    <a href="{{route('home')}}" class="btn btn-primary justify-content-between">На главную</a>
+                </li>
+            </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a href="{{route('logout')}}" class="btn btn-primary justify-content-between">Выйти</a>
