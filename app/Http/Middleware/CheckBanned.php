@@ -22,9 +22,9 @@ class CheckBanned
             if ($banned_days > 14) {
                 $message = 'Your account has been banned. Please contact administrator.';
             } elseif($banned_days < 14 && $banned_hours > 24) {
-                $message = 'Your account has been banned for '.Str::CutToFirstPoint($banned_days). 'day '.  'Please contact administrator.';
+                $message = 'Your account has been banned for '.Str::CutToFirstPoint($banned_days). 'day(s) '.  'Please contact administrator.';
             } else {
-                $message = 'Your account has been banned for '.Str::CutToFirstPoint($banned_hours).' hours ' . 'Please contact administrator.';
+                $message = 'Your account has been banned for '.Str::CutToFirstPoint($banned_hours).' hour(s) ' . 'Please contact administrator.';
             }
 
             return redirect()->route('login.get')->with('banned', $message);

@@ -2,15 +2,11 @@
 
 namespace App\Http\Services;
 
-use App\Jobs\PaymentJob;
 use App\Jobs\SendPaymentNotificationToUserJob;
-use App\Mail\User\Payment;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use PHPUnit\Exception;
 
 class OrderService {

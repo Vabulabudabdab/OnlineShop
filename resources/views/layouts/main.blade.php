@@ -205,7 +205,7 @@
                                     <div class="right d-flex align-items-center ">
 
                                         @if(auth()->user())
-                                            Ваш баланс: {{strpos(auth()->user()->balance / auth()->user()->currency->value, '.') ? Str::cutToFirstPoint(auth()->user()->balance / auth()->user()->currency->value) : auth()->user()->balance / auth()->user()->currency->value }}
+                                            Ваш баланс: {{auth()->user()->balance / auth()->user()->currency->value ? Str::moneyFormat(auth()->user()->balance / auth()->user()->currency->value) : auth()->user()->balance / auth()->user()->currency->value }}
                                             {{auth()->user()->currency->title}}
                                         @endif
                                         @if(auth()->user())
